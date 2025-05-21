@@ -3,94 +3,139 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Ceo's Roblox Experience</title>
-  <script src="https://cdn.tailwindcss.com"></script>
+  <title>Ceo's Portfolio</title>
+  <link href="https://fonts.googleapis.com/css2?family=Lexend&display=swap" rel="stylesheet">
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Lexend', sans-serif;
+    }
+
+    body {
+      background-color: #f4f4f4;
+      color: #222;
+      padding: 2rem;
+    }
+
+    header {
+      text-align: center;
+      margin-bottom: 2rem;
+    }
+
+    h1 {
+      font-size: 2.5rem;
+      margin-bottom: 0.5rem;
+    }
+
+    h2 {
+      font-size: 1.8rem;
+      margin-top: 2rem;
+      margin-bottom: 1rem;
+      border-bottom: 2px solid #ccc;
+      padding-bottom: 0.3rem;
+    }
+
+    .card-container {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1.5rem;
+      justify-content: center;
+    }
+
+    .card {
+      background-color: #ffffff;
+      border-radius: 12px;
+      padding: 1.2rem;
+      width: 300px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.06);
+      transition: transform 0.2s;
+    }
+
+    .card:hover {
+      transform: scale(1.02);
+    }
+
+    .card img {
+      max-width: 100%;
+      border-radius: 6px;
+      margin-bottom: 1rem;
+    }
+
+    .card h3 {
+      font-size: 1.2rem;
+      margin-bottom: 0.4rem;
+    }
+
+    .card p {
+      font-size: 0.95rem;
+      color: #555;
+    }
+
+    .tags {
+      margin-top: 1rem;
+    }
+
+    .tag {
+      background-color: #e0e0e0;
+      color: #333;
+      border-radius: 20px;
+      padding: 4px 10px;
+      font-size: 0.85rem;
+      margin-right: 6px;
+      display: inline-block;
+    }
+
+    footer {
+      text-align: center;
+      margin-top: 3rem;
+      color: #aaa;
+      font-size: 0.9rem;
+    }
+  </style>
 </head>
-<body class="bg-gradient-to-b from-slate-100 to-slate-300 min-h-screen text-gray-900 font-sans">
-  <nav class="bg-white shadow-md px-6 py-4 flex justify-between items-center">
-    <div class="text-2xl font-bold text-blue-700">Roblox Experience</div>
-    <div class="flex gap-4 text-sm text-gray-600 font-medium">
-      <a href="#professional" class="hover:text-blue-700">Professional Experience</a>
-      <a href="#armed" class="hover:text-blue-700">Armed Forces Experience</a>
-      <a href="#awards" class="hover:text-blue-700">Armed Forces Awards</a>
-    </div>
-    <div class="text-xs bg-gray-300 px-3 py-1 rounded">2025-05-21</div>
-  </nav>
+<body>
+  <header>
+    <h1>Ceo’s Portfolio</h1>
+    <p>Roblox Username: Ceo2000_08yt | Discord: .Ceo2000_08</p>
+  </header>
 
-  <!-- Professional Experience -->
-  <section id="professional" class="px-6 py-10">
-    <h2 class="text-3xl font-bold text-center mb-6">Professional Experience</h2>
-    <div class="grid md:grid-cols-3 gap-6">
-      <!-- Card 1 -->
-      <div class="bg-white rounded-xl shadow-md p-4 text-center">
-        <h3 class="text-xl font-semibold">SharpVision</h3>
-        <p class="text-sm text-gray-600 mb-3">Website Developer</p>
-        <img src="https://via.placeholder.com/300x150/000000/FFFFFF?text=SharpVision" alt="SharpVision" class="mx-auto rounded-md mb-4" />
-        <div class="flex justify-center gap-2">
-          <button class="bg-gray-200 px-3 py-1 rounded-md text-sm">Discord</button>
-          <button class="bg-gray-200 px-3 py-1 rounded-md text-sm">Roblox</button>
+  <section>
+    <h2>Professional Experience</h2>
+    <div class="card-container">
+      <div class="card">
+        <img src="https://i.imgur.com/X0wG1kQ.png" alt="SharpVision">
+        <h3>SharpVision</h3>
+        <p>Website Developer</p>
+        <div class="tags">
+          <span class="tag">Roblox</span>
+          <span class="tag">Discord</span>
         </div>
       </div>
-
-      <!-- Card 2 -->
-      <div class="bg-white rounded-xl shadow-md p-4 text-center">
-        <h3 class="text-xl font-semibold">Frontier Threads</h3>
-        <p class="text-sm text-gray-600 mb-3">Manager</p>
-        <img src="https://via.placeholder.com/300x150/cccccc/000000?text=Frontier+Threads" alt="Frontier Threads" class="mx-auto rounded-md mb-4" />
-        <div class="flex justify-center gap-2">
-          <button class="bg-gray-200 px-3 py-1 rounded-md text-sm">Discord</button>
-          <button class="bg-gray-200 px-3 py-1 rounded-md text-sm">Roblox</button>
+      <div class="card">
+        <img src="https://i.imgur.com/YXBtzLg.png" alt="Frontier Threads">
+        <h3>Frontier Threads</h3>
+        <p>Manager</p>
+        <div class="tags">
+          <span class="tag">Roblox</span>
+          <span class="tag">Discord</span>
         </div>
       </div>
-
-      <!-- Card 3 -->
-      <div class="bg-white rounded-xl shadow-md p-4 text-center">
-        <h3 class="text-xl font-semibold">Radcat Productions</h3>
-        <p class="text-sm text-gray-600 mb-3">Website Developer</p>
-        <img src="https://via.placeholder.com/300x150/111111/FFD700?text=Radcat+Productions" alt="Radcat" class="mx-auto rounded-md mb-4" />
-        <div class="flex justify-center gap-2">
-          <button class="bg-gray-200 px-3 py-1 rounded-md text-sm">Discord</button>
-          <button class="bg-gray-200 px-3 py-1 rounded-md text-sm">Website</button>
+      <div class="card">
+        <img src="https://i.imgur.com/v5vJ1pz.png" alt="Radcat Productions">
+        <h3>Radcat Productions</h3>
+        <p>Website Developer</p>
+        <div class="tags">
+          <span class="tag">Discord</span>
+          <span class="tag">Website</span>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- Armed Forces Experience -->
-  <section id="armed" class="px-6 py-10 bg-slate-100">
-    <h2 class="text-3xl font-bold text-center mb-6">Armed Forces Experience</h2>
-    <div class="grid md:grid-cols-2 gap-6">
-      <!-- USAR -->
-      <div class="bg-white rounded-xl shadow-md p-4">
-        <h3 class="text-xl font-semibold text-center mb-2">United States Army (USAR)</h3>
-        <img src="https://via.placeholder.com/400x180/333333/FFFFFF?text=USAR" alt="USAR" class="mx-auto rounded-md mb-4" />
-        <div class="text-sm space-y-1">
-          <p><strong>JFKSWCS:</strong> CFS, CXO, CCO (Held SOTWx2), Executive Officer</p>
-          <p><strong>1st Cavalry Division:</strong> CXO, CCO</p>
-          <p><strong>82nd Airborne:</strong> CXO</p>
-        </div>
-        <div class="flex justify-center gap-2 mt-4">
-          <button class="bg-gray-200 px-3 py-1 rounded-md text-sm">Discord</button>
-          <button class="bg-gray-200 px-3 py-1 rounded-md text-sm">Roblox</button>
-        </div>
-      </div>
-
-      <!-- USAF -->
-      <div class="bg-white rounded-xl shadow-md p-4">
-        <h3 class="text-xl font-semibold text-center mb-2">United States Air Force (USAF)</h3>
-        <img src="https://via.placeholder.com/400x180/4444ff/ffffff?text=USAF" alt="USAF" class="mx-auto rounded-md mb-4" />
-        <div class="text-sm space-y-1">
-          <p><strong>Air Staff (JCoS):</strong> CMSAF, CSAF, A-CJCS</p>
-          <p><strong>Security Forces:</strong> GCO, DCoS, CG</p>
-          <p><strong>ACC:</strong> SCO, GCO, CCMS</p>
-        </div>
-        <div class="flex justify-center gap-2 mt-4">
-          <button class="bg-gray-200 px-3 py-1 rounded-md text-sm">Discord</button>
-          <button class="bg-gray-200 px-3 py-1 rounded-md text-sm">Roblox</button>
-        </div>
-      </div>
-    </div>
-  </section>
-
+  <footer>
+    &copy; 2025 Ceo. All rights reserved.
+  </footer>
 </body>
 </html>
