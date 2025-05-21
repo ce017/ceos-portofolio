@@ -3,63 +3,88 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Ceo's Portfolio</title>
-  <link href="https://fonts.googleapis.com/css2?family=Lexend&display=swap" rel="stylesheet">
+  <title>Animated Intro</title>
   <style>
     * {
-      box-sizing: border-box;
       margin: 0;
       padding: 0;
+      box-sizing: border-box;
+    }
+
+    body, html {
+      height: 100%;
       font-family: 'Lexend', sans-serif;
+      background-color: #f5f5f5;
+      overflow: hidden;
     }
 
-    body {
-      background-color: #f4f4f4;
-      color: #222;
-      padding: 2rem;
+    .intro {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background-color: #1c1c1c;
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      z-index: 9999;
+      animation: fadeOut 2s ease 3s forwards;
     }
 
-    header {
-      text-align: center;
-      margin-bottom: 2rem;
-    }
-
-    h1 {
+    .intro h1 {
       font-size: 2.5rem;
-      margin-bottom: 0.5rem;
+      opacity: 0;
+      animation: fadeIn 2s ease forwards;
     }
 
-    h2 {
-      font-size: 1.8rem;
-      margin-top: 2rem;
-      margin-bottom: 1rem;
-      border-bottom: 2px solid #ccc;
-      padding-bottom: 0.3rem;
+    .intro p {
+      font-size: 1.2rem;
+      margin-top: 0.5rem;
+      opacity: 0;
+      animation: fadeIn 2s ease 1s forwards;
     }
 
-    p {
+    @keyframes fadeIn {
+      to {
+        opacity: 1;
+      }
+    }
+
+    @keyframes fadeOut {
+      to {
+        opacity: 0;
+        visibility: hidden;
+      }
+    }
+
+    .main-content {
+      opacity: 0;
+      animation: contentIn 1s ease 4s forwards;
       text-align: center;
-      font-size: 1.1rem;
-      color: #444;
+      padding-top: 20vh;
     }
 
-    footer {
-      text-align: center;
-      margin-top: 3rem;
-      color: #aaa;
-      font-size: 0.9rem;
+    @keyframes contentIn {
+      to {
+        opacity: 1;
+      }
     }
   </style>
+  <link href="https://fonts.googleapis.com/css2?family=Lexend&display=swap" rel="stylesheet">
 </head>
 <body>
-  <header>
-    <h1>Ceo’s Portfolio</h1>
-    <p>Roblox Username: Ceo2000_08yt</p>
-    <p>Discord: .Ceo2000_08</p>
-  </header>
+  <div class="intro">
+    <h1>Welcome to Ceo's Portfolio</h1>
+    <p>Loading your experience...</p>
+  </div>
 
-  <footer>
-    &copy; 2025 Ceo. All rights reserved.
-  </footer>
+  <div class="main-content">
+    <h2>Main Website Content</h2>
+    <p>This will be visible after the intro animation ends.</p>
+  </div>
 </body>
 </html>
+
