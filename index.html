@@ -1,90 +1,620 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Animated Intro</title>
-  <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-
-    body, html {
-      height: 100%;
-      font-family: 'Lexend', sans-serif;
-      background-color: #f5f5f5;
-      overflow: hidden;
-    }
-
-    .intro {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100vw;
-      height: 100vh;
-      background-color: #1c1c1c;
-      color: white;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      flex-direction: column;
-      z-index: 9999;
-      animation: fadeOut 2s ease 3s forwards;
-    }
-
-    .intro h1 {
-      font-size: 2.5rem;
-      opacity: 0;
-      animation: fadeIn 2s ease forwards;
-    }
-
-    .intro p {
-      font-size: 1.2rem;
-      margin-top: 0.5rem;
-      opacity: 0;
-      animation: fadeIn 2s ease 1s forwards;
-    }
-
-    @keyframes fadeIn {
-      to {
-        opacity: 1;
-      }
-    }
-
-    @keyframes fadeOut {
-      to {
-        opacity: 0;
-        visibility: hidden;
-      }
-    }
-
-    .main-content {
-      opacity: 0;
-      animation: contentIn 1s ease 4s forwards;
-      text-align: center;
-      padding-top: 20vh;
-    }
-
-    @keyframes contentIn {
-      to {
-        opacity: 1;
-      }
-    }
-  </style>
-  <link href="https://fonts.googleapis.com/css2?family=Lexend&display=swap" rel="stylesheet">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ceo's Portfolio</title>
+<script src="https://cdn.tailwindcss.com/3.4.16"></script>
+<script>tailwind.config={theme:{extend:{colors:{primary:'#6366f1',secondary:'#8b5cf6'},borderRadius:{'none':'0px','sm':'4px',DEFAULT:'8px','md':'12px','lg':'16px','xl':'20px','2xl':'24px','3xl':'32px','full':'9999px','button':'8px'}}}}</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.6.0/remixicon.min.css">
+<style>
+:where([class^="ri-"])::before { content: "\f3c2"; }
+body {
+font-family: 'Lexend', sans-serif;
+background-color: #f8f9fa;
+color: #212529;
+}
+.loading-screen {
+position: fixed;
+top: 0;
+left: 0;
+width: 100%;
+height: 100%;
+background-color: #f5f5f5;
+display: flex;
+flex-direction: column;
+justify-content: center;
+align-items: center;
+z-index: 9999;
+transition: opacity 0.5s ease-out;
+}
+.loading-logo {
+font-size: 48px;
+font-weight: 700;
+color: #6366f1;
+animation: pulse 2s infinite;
+}
+.loading-text {
+margin-top: 16px;
+font-size: 16px;
+color: #6c757d;
+}
+@keyframes pulse {
+0% { transform: scale(1); }
+50% { transform: scale(1.05); }
+100% { transform: scale(1); }
+}
+.section {
+min-height: calc(100vh - 80px);
+opacity: 0;
+transform: translateY(20px);
+transition: opacity 0.5s ease, transform 0.5s ease;
+}
+.section.visible {
+opacity: 1;
+transform: translateY(0);
+}
+.nav-button {
+position: relative;
+overflow: hidden;
+transition: all 0.3s ease;
+}
+.nav-button:after {
+content: '';
+position: absolute;
+bottom: 0;
+left: 50%;
+width: 0;
+height: 2px;
+background-color: #6366f1;
+transition: all 0.3s ease;
+transform: translateX(-50%);
+}
+.nav-button:hover:after {
+width: 100%;
+}
+.nav-button.active:after {
+width: 100%;
+}
+.experience-item {
+position: relative;
+padding-left: 20px;
+transition: all 0.3s ease;
+}
+.experience-item:before {
+content: '';
+position: absolute;
+left: 0;
+top: 50%;
+transform: translateY(-50%);
+width: 6px;
+height: 6px;
+border-radius: 50%;
+background-color: #6366f1;
+}
+.experience-card {
+transition: all 0.3s ease;
+}
+.experience-card:hover {
+transform: translateY(-5px);
+box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+}
+.back-to-top {
+position: fixed;
+bottom: 20px;
+right: 20px;
+z-index: 99;
+opacity: 0;
+visibility: hidden;
+transition: all 0.3s ease;
+}
+.back-to-top.visible {
+opacity: 1;
+visibility: visible;
+}
+</style>
 </head>
 <body>
-  <div class="intro">
-    <h1>Welcome to Ceo's Portfolio</h1>
-    <p>Loading your experience...</p>
-  </div>
-
-  <div class="main-content">
-    <h2>Main Website Content</h2>
-    <p>This will be visible after the intro animation ends.</p>
-  </div>
+<div class="loading-screen" id="loadingScreen">
+<div class="loading-logo">17</div>
+<div class="loading-text">Loading...</div>
+</div>
+<header class="fixed top-0 left-0 w-full bg-white bg-opacity-95 shadow-sm z-50 transition-all duration-300">
+<div class="container mx-auto px-4 py-4 flex justify-between items-center">
+<a href="#home" class="text-2xl font-bold text-primary">17</a>
+<nav class="hidden md:flex space-x-6">
+<a href="#about" class="nav-button text-gray-700 hover:text-primary">About Me</a>
+<a href="#experience" class="nav-button text-gray-700 hover:text-primary">Experience</a>
+<a href="#skills" class="nav-button text-gray-700 hover:text-primary">Skills</a>
+<a href="#awards" class="nav-button text-gray-700 hover:text-primary">Awards</a>
+<a href="#contact" class="nav-button text-gray-700 hover:text-primary">Contact</a>
+</nav>
+<button class="md:hidden w-10 h-10 flex items-center justify-center text-gray-700" id="mobileMenuButton">
+<i class="ri-menu-line ri-lg"></i>
+</button>
+</div>
+<div class="mobile-menu hidden w-full bg-white shadow-md absolute top-full left-0 py-4 px-4 md:hidden" id="mobileMenu">
+<div class="flex flex-col space-y-4">
+<a href="#about" class="nav-button text-gray-700 hover:text-primary py-2">About Me</a>
+<a href="#experience" class="nav-button text-gray-700 hover:text-primary py-2">Experience</a>
+<a href="#skills" class="nav-button text-gray-700 hover:text-primary py-2">Skills</a>
+<a href="#awards" class="nav-button text-gray-700 hover:text-primary py-2">Awards</a>
+<a href="#contact" class="nav-button text-gray-700 hover:text-primary py-2">Contact</a>
+</div>
+</div>
+</header>
+<main class="pt-20">
+<section id="home" class="section min-h-screen flex items-center justify-center">
+<div class="container mx-auto px-4 text-center">
+<h1 class="text-5xl md:text-6xl font-bold mb-8">Hi, I'm Ceo.</h1>
+<div class="flex flex-wrap justify-center gap-4">
+<a href="#about" class="px-6 py-3 bg-white text-gray-800 rounded-button shadow-md hover:shadow-lg transition-all duration-300 whitespace-nowrap">About Me</a>
+<a href="#experience" class="px-6 py-3 bg-white text-gray-800 rounded-button shadow-md hover:shadow-lg transition-all duration-300 whitespace-nowrap">Experience</a>
+<a href="#skills" class="px-6 py-3 bg-white text-gray-800 rounded-button shadow-md hover:shadow-lg transition-all duration-300 whitespace-nowrap">Skills</a>
+<a href="#contact" class="px-6 py-3 bg-white text-gray-800 rounded-button shadow-md hover:shadow-lg transition-all duration-300 whitespace-nowrap">Contact</a>
+</div>
+</div>
+</section>
+<section id="about" class="section py-20 bg-white">
+<div class="container mx-auto px-4">
+<h2 class="text-3xl font-bold text-center mb-12">About Me</h2>
+<div class="max-w-2xl mx-auto bg-white p-8 rounded-lg shadow-md">
+<p class="text-lg leading-relaxed text-gray-700">
+I'm Ceo from Italy. I'm passionate about the army, economics, and gaming. I enjoy learning and working on a variety of projects, especially when I can combine my interests. I like paying attention to details and figuring things out, whether it's in games, school work, or tech challenges.
+</p>
+</div>
+<div class="flex justify-center mt-12">
+<a href="#experience" class="px-6 py-3 bg-primary text-white rounded-button shadow-md hover:bg-opacity-90 transition-all duration-300 whitespace-nowrap">View My Experience</a>
+</div>
+</div>
+</section>
+<section id="experience" class="section py-20 bg-gray-50">
+<div class="container mx-auto px-4">
+<h2 class="text-3xl font-bold text-center mb-12">Experience</h2>
+<div class="max-w-4xl mx-auto space-y-10">
+<!-- Zanance's USAR -->
+<div class="experience-card bg-white p-6 rounded-lg shadow-md">
+<h3 class="text-xl font-bold text-gray-800 border-b border-gray-200 pb-3 mb-4">Zanance's USAR</h3>
+<div class="space-y-6">
+<div>
+<h4 class="text-lg font-semibold text-primary mb-3">JFKSWCS (ASOC)</h4>
+<ul class="space-y-2">
+<li class="experience-item">Deputy Head Instructor <span class="text-gray-500">x3</span></li>
+<li class="experience-item">Head Instructor <span class="text-gray-500">x3</span></li>
+<li class="experience-item">Company First Sergeant</li>
+<li class="experience-item">Instructor of the Week <span class="text-gray-500">x2</span></li>
+<li class="experience-item">Staff of the Week <span class="text-gray-500">x1</span></li>
+</ul>
+</div>
+<div>
+<h4 class="text-lg font-semibold text-primary mb-3">14th (MPC)</h4>
+<ul class="space-y-2">
+<li class="experience-item">Law Instructor</li>
+<li class="experience-item">Advanced Law Instructor</li>
+<li class="experience-item">Instructor of the Week <span class="text-gray-500">x2</span></li>
+</ul>
+</div>
+<div>
+<h4 class="text-lg font-semibold text-primary mb-3">ASF (ASOC)</h4>
+<ul class="space-y-2">
+<li class="experience-item">Head Instructor</li>
+</ul>
+</div>
+<div>
+<h4 class="text-lg font-semibold text-primary mb-3">82nd (FORSCOM)</h4>
+<ul class="space-y-2">
+<li class="experience-item">Senior Black Hat</li>
+<li class="experience-item">Platoon Sergeant</li>
+<li class="experience-item">Platoon Leader</li>
+</ul>
+</div>
+<div>
+<h4 class="text-lg font-semibold text-primary mb-3">101st (FORSCOM)</h4>
+<ul class="space-y-2">
+<li class="experience-item">Senior Pilot</li>
+<li class="experience-item">Platoon Staff</li>
+<li class="experience-item">Senior Black Hat</li>
+</ul>
+</div>
+<div>
+<h4 class="text-lg font-semibold text-primary mb-3">75th (ASOC)</h4>
+<ul class="space-y-2">
+<li class="experience-item">Platoon Sergeant</li>
+</ul>
+</div>
+<div>
+<h4 class="text-lg font-semibold text-primary mb-3">1ID (FORSCOM)</h4>
+<ul class="space-y-2">
+<li class="experience-item">Head Instructor</li>
+<li class="experience-item">Platoon Sergeant</li>
+</ul>
+</div>
+</div>
+</div>
+<!-- Zer0's USAF -->
+<div class="experience-card bg-white p-6 rounded-lg shadow-md">
+<h3 class="text-xl font-bold text-gray-800 border-b border-gray-200 pb-3 mb-4">Zer0's USAF</h3>
+<div class="space-y-6">
+<div>
+<h4 class="text-lg font-semibold text-primary mb-3">31st Wing (ACC)</h4>
+<ul class="space-y-2">
+<li class="experience-item">Squadron Chief Master Sergeant</li>
+<li class="experience-item">Wing Command Chief Master Sergeant</li>
+<li class="experience-item">Wing Commander</li>
+</ul>
+</div>
+<div>
+<h4 class="text-lg font-semibold text-primary mb-3">Community Staff</h4>
+<ul class="space-y-2">
+<li class="experience-item">Moderator</li>
+</ul>
+</div>
+</div>
+</div>
+<!-- FuFu's German Army -->
+<div class="experience-card bg-white p-6 rounded-lg shadow-md">
+<h3 class="text-xl font-bold text-gray-800 border-b border-gray-200 pb-3 mb-4">FuFu's German Army</h3>
+<div class="space-y-6">
+<div>
+<h4 class="text-lg font-semibold text-primary mb-3">Special Forces Command</h4>
+<ul class="space-y-2">
+<li class="experience-item">Deputy Commanding General</li>
+<li class="experience-item">Commanding General</li>
+<li class="experience-item">Upper-Army Staff</li>
+<li class="experience-item">Inspector of the Army (second in command)</li>
+</ul>
+</div>
+</div>
+</div>
+<!-- Various Hood Games -->
+<div class="experience-card bg-white p-6 rounded-lg shadow-md">
+<h3 class="text-xl font-bold text-gray-800 border-b border-gray-200 pb-3 mb-4">Various Hood Games</h3>
+<div class="space-y-6">
+<p class="text-gray-600 italic mb-4">These games had 1.5k active players at the time</p>
+<ul class="space-y-2">
+<li class="experience-item">Staff Manager</li>
+<li class="experience-item">Moderator</li>
+<li class="experience-item">Head Moderator</li>
+<li class="experience-item">Head of In-Game Moderation</li>
+<li class="experience-item">Event Host</li>
+<li class="experience-item">Admin</li>
+<li class="experience-item">Head Admin</li>
+<li class="experience-item">Administrator</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="flex justify-center mt-12">
+<a href="#skills" class="px-6 py-3 bg-primary text-white rounded-button shadow-md hover:bg-opacity-90 transition-all duration-300 whitespace-nowrap">View My Skills</a>
+</div>
+</div>
+</section>
+<section id="skills" class="section py-20 bg-white">
+<div class="container mx-auto px-4">
+<h2 class="text-3xl font-bold text-center mb-12">Skills</h2>
+<div class="max-w-2xl mx-auto bg-white p-8 rounded-lg shadow-md">
+<p class="text-lg leading-relaxed text-gray-700">
+I've built leadership, communication, collaboration, and teamwork skills from courses I took at a research center in Northern Italy. Working on group projects helped me learn how to manage tasks, lead, and communicate effectively.
+</p>
+<div class="mt-8 grid grid-cols-1 md:grid-cols-2 gap-6">
+<div class="bg-gray-50 p-4 rounded-lg">
+<h3 class="text-lg font-semibold mb-3 text-primary">Leadership</h3>
+<div class="w-full bg-gray-200 rounded-full h-2.5">
+<div class="bg-primary h-2.5 rounded-full" style="width: 95%"></div>
+</div>
+</div>
+<div class="bg-gray-50 p-4 rounded-lg">
+<h3 class="text-lg font-semibold mb-3 text-primary">Communication</h3>
+<div class="w-full bg-gray-200 rounded-full h-2.5">
+<div class="bg-primary h-2.5 rounded-full" style="width: 90%"></div>
+</div>
+</div>
+<div class="bg-gray-50 p-4 rounded-lg">
+<h3 class="text-lg font-semibold mb-3 text-primary">Collaboration</h3>
+<div class="w-full bg-gray-200 rounded-full h-2.5">
+<div class="bg-primary h-2.5 rounded-full" style="width: 85%"></div>
+</div>
+</div>
+<div class="bg-gray-50 p-4 rounded-lg">
+<h3 class="text-lg font-semibold mb-3 text-primary">Teamwork</h3>
+<div class="w-full bg-gray-200 rounded-full h-2.5">
+<div class="bg-primary h-2.5 rounded-full" style="width: 92%"></div>
+</div>
+</div>
+</div>
+</div>
+<div class="flex justify-center mt-12">
+<a href="#awards" class="px-6 py-3 bg-primary text-white rounded-button shadow-md hover:bg-opacity-90 transition-all duration-300 whitespace-nowrap">View My Awards</a>
+</div>
+</div>
+</section>
+<section id="awards" class="section py-20 bg-gray-50">
+<div class="container mx-auto px-4">
+<h2 class="text-3xl font-bold text-center mb-12">Military Awards & Decorations</h2>
+<div class="max-w-4xl mx-auto">
+<div class="bg-white p-8 rounded-lg shadow-md">
+<div class="mb-8">
+<h3 class="text-xl font-bold text-gray-800 mb-4">USAR</h3>
+<h4 class="text-lg font-semibold text-gray-700 mb-3">Badges</h4>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+<div class="space-y-2">
+<div class="flex items-center space-x-2">
+<i class="ri-medal-line text-primary"></i>
+<span>Special Operations Diver</span>
+</div>
+<div class="flex items-center space-x-2">
+<i class="ri-medal-line text-primary"></i>
+<span>1ID, SOAR, JFK, ASF CSIB</span>
+</div>
+<div class="flex items-center space-x-2">
+<i class="ri-medal-line text-primary"></i>
+<span>Basic Military Freefall Badge</span>
+</div>
+<div class="flex items-center space-x-2">
+<i class="ri-medal-line text-primary"></i>
+<span>Army Pathfinder Badge</span>
+</div>
+<div class="flex items-center space-x-2">
+<i class="ri-medal-line text-primary"></i>
+<span>Ranger Tab</span>
+</div>
+</div>
+<div class="space-y-2">
+<div class="flex items-center space-x-2">
+<i class="ri-medal-line text-primary"></i>
+<span>Expert Marksman Qualification Badge</span>
+</div>
+<div class="flex items-center space-x-2">
+<i class="ri-medal-line text-primary"></i>
+<span>3 Overseas Bars</span>
+</div>
+<div class="flex items-center space-x-2">
+<i class="ri-medal-line text-primary"></i>
+<span>Army Air Assault Badge</span>
+</div>
+<div class="flex items-center space-x-2">
+<i class="ri-medal-line text-primary"></i>
+<span>Basic Parachutist Badge</span>
+</div>
+<div class="flex items-center space-x-2">
+<i class="ri-medal-line text-primary"></i>
+<span>Combat Action Badge</span>
+</div>
+<div class="flex items-center space-x-2">
+<i class="ri-medal-line text-primary"></i>
+<span>Combat Infantryman Badge x2</span>
+</div>
+</div>
+</div>
+</div>
+<div class="mb-8">
+<h4 class="text-lg font-semibold text-gray-700 mb-3">Ribbons</h4>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+<div class="space-y-2">
+<div class="flex items-center space-x-2">
+<i class="ri-award-line text-primary"></i>
+<span>Antarctica Service</span>
+</div>
+<div class="flex items-center space-x-2">
+<i class="ri-award-line text-primary"></i>
+<span>National Defense Service</span>
+</div>
+<div class="flex items-center space-x-2">
+<i class="ri-award-line text-primary"></i>
+<span>Global War on Terrorism</span>
+</div>
+</div>
+<div class="space-y-2">
+<div class="flex items-center space-x-2">
+<i class="ri-award-line text-primary"></i>
+<span>NCO Professional Development</span>
+</div>
+<div class="flex items-center space-x-2">
+<i class="ri-award-line text-primary"></i>
+<span>Army Service</span>
+</div>
+</div>
+</div>
+</div>
+<div class="mt-12">
+<h3 class="text-xl font-bold text-gray-800 mb-4">USAF</h3>
+<div class="mb-8">
+<h4 class="text-lg font-semibold text-gray-700 mb-3">Badges</h4>
+<div class="space-y-2">
+<div class="flex items-center space-x-2">
+<i class="ri-medal-line text-primary"></i>
+<span>Senior Pilot Wings</span>
+</div>
+</div>
+</div>
+<div>
+<h4 class="text-lg font-semibold text-gray-700 mb-3">Ribbons</h4>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+<div class="space-y-2">
+<div class="flex items-center space-x-2">
+<i class="ri-award-line text-primary"></i>
+<span>Air Force Good Conduct</span>
+</div>
+<div class="flex items-center space-x-2">
+<i class="ri-award-line text-primary"></i>
+<span>Air Force Commendation</span>
+</div>
+<div class="flex items-center space-x-2">
+<i class="ri-award-line text-primary"></i>
+<span>Global War on Terrorism Service</span>
+</div>
+</div>
+<div class="space-y-2">
+<div class="flex items-center space-x-2">
+<i class="ri-award-line text-primary"></i>
+<span>Armed Forces Service</span>
+</div>
+<div class="flex items-center space-x-2">
+<i class="ri-award-line text-primary"></i>
+<span>NCO Professional Development</span>
+</div>
+<div class="flex items-center space-x-2">
+<i class="ri-award-line text-primary"></i>
+<span>Air Force Recruiter</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="flex justify-center mt-12">
+<a href="#contact" class="px-6 py-3 bg-primary text-white rounded-button shadow-md hover:bg-opacity-90 transition-all duration-300 whitespace-nowrap">Contact Me</a>
+</div>
+</div>
+</div>
+</section>
+<section id="contact" class="section py-20 bg-white">
+<div class="container mx-auto px-4">
+<h2 class="text-3xl font-bold text-center mb-12">Contact</h2>
+<div class="max-w-lg mx-auto bg-white p-8 rounded-lg shadow-md">
+<div class="grid grid-cols-1 gap-6">
+<a href="https://discord.com/users/694228874535633057" target="_blank" class="flex items-center justify-between p-4 bg-gray-50 rounded-lg hover:bg-gray-100 transition-all duration-300">
+<div class="flex items-center">
+<div class="w-10 h-10 flex items-center justify-center bg-[#5865F2] text-white rounded-full">
+<img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMjcuMTQgOTYuMzYiPjxnPjxwYXRoIGQ9Ik0xMDcuNyA4LjA3QTEwNS4xNSAxMDUuMTUgMCAwIDAgODEuNDcgMGE3Mi4wNiA3Mi4wNiAwIDAgMC0zLjM2IDguNjUgOTcuNjggOTcuNjggMCAwIDAtMjkuMTEgMEE3Mi4zNyA3Mi4zNyAwIDAgMCA0NS42MyAwYTEwNS44OSAxMDUuODkgMCAwIDAtMjYuMjUgOC4wOUMyLjc5IDMyLjY1LTEuNzEgNTYuNi41NCAxODAuMTNhMTA4LjMyIDEwOC4zMiAwIDAgMCAzMi42IDE2LjE1IDgxLjQ0IDgxLjQ0IDAgMCAwIDcuMDgtMTEuNTEgNjguNzggNjguNzggMCAwIDEtMTEuMTItNS4zMSA2OC40OSA2OC40OSAwIDAgMCAxLjE3LS45MiA3Ny4zOSA3Ny4zOSAwIDAgMCA2Ni4wNSAwYy4zOS4zMi43Ny42NS0xLjE2LjkyYTY4LjU3IDY4LjU3IDAgMCAxLTExLjE0IDUuMzIgODEuMTggODEuMTggMCAwIDAgNy4wOCAxMS41IDEwNy44NiAxMDcuODYgMCAwIDAgMzIuNi0xNi4xNGMyLjYxLTI3LjE4LTQuNDctNTAuODQtMTkuNDMtNzEuOTd6TTQyLjQ1IDYwLjM5Yy02LjM1IDAtMTEuNTQtNS44Mi0xMS41NC0xMyAwLTcuMTUgNS4wOC0xMyAxMS41NC0xM3MxMS42MyA1Ljg0IDExLjU0IDEzYy0uMDkgNy4xNS01LjE5IDEzLTExLjU0IDEzem00Mi42NSAwYy02LjM1IDAtMTEuNTQtNS44Mi0xMS41NC0xMyAwLTcuMTUgNS4wOC0xMyAxMS41NC0xM3MxMS42MyA1Ljg0IDExLjU0IDEzYy0uMDkgNy4xNS01LjE5IDEzLTExLjU0IDEzeiIgZmlsbD0iI2ZmZiIvPjwvZz48L3N2Zz4=" alt="Discord" class="w-6 h-6">
+</div>
+<span class="ml-4 text-gray-800 font-medium">Discord</span>
+</div>
+<i class="ri-arrow-right-line ri-lg text-gray-500"></i>
+</a>
+<a href="https://t.me/lce17" target="_blank" class="flex items-center justify-between p-4 bg-gray-50 rounded-lg hover:bg-gray-100 transition-all duration-300">
+<div class="flex items-center">
+<div class="w-10 h-10 flex items-center justify-center bg-[#0088cc] text-white rounded-full">
+<i class="ri-telegram-fill ri-lg"></i>
+</div>
+<span class="ml-4 text-gray-800 font-medium">Telegram</span>
+</div>
+<i class="ri-arrow-right-line ri-lg text-gray-500"></i>
+</a>
+<a href="mailto:leoilceo.com@gmail.com" class="flex items-center justify-between p-4 bg-gray-50 rounded-lg hover:bg-gray-100 transition-all duration-300">
+<div class="flex items-center">
+<div class="w-10 h-10 flex items-center justify-center bg-[#EA4335] text-white rounded-full">
+<i class="ri-mail-fill ri-lg"></i>
+</div>
+<span class="ml-4 text-gray-800 font-medium">Email</span>
+</div>
+<i class="ri-arrow-right-line ri-lg text-gray-500"></i>
+</a>
+</div>
+</div>
+<div class="flex justify-center mt-12">
+<a href="#home" class="px-6 py-3 bg-primary text-white rounded-button shadow-md hover:bg-opacity-90 transition-all duration-300 whitespace-nowrap">Back to Home</a>
+</div>
+</div>
+</section>
+</main>
+<footer class="bg-white py-8 border-t border-gray-200">
+<div class="container mx-auto px-4 text-center">
+<p class="text-gray-600">© 2025 Ceo's Portfolio. All rights reserved.</p>
+<p class="text-gray-500 text-sm mt-2">Last updated: June 22, 2025</p>
+</div>
+</footer>
+<button class="back-to-top w-12 h-12 bg-primary text-white rounded-full shadow-lg flex items-center justify-center" id="backToTop">
+<i class="ri-arrow-up-line ri-lg"></i>
+</button>
+<script id="loadingScript">
+document.addEventListener('DOMContentLoaded', function() {
+setTimeout(function() {
+const loadingScreen = document.getElementById('loadingScreen');
+loadingScreen.style.opacity = '0';
+setTimeout(function() {
+loadingScreen.style.display = 'none';
+document.querySelectorAll('.section').forEach(function(section, index) {
+setTimeout(function() {
+section.classList.add('visible');
+}, 100 * index);
+});
+}, 500);
+}, 1500);
+});
+</script>
+<script id="navigationScript">
+document.addEventListener('DOMContentLoaded', function() {
+const mobileMenuButton = document.getElementById('mobileMenuButton');
+const mobileMenu = document.getElementById('mobileMenu');
+mobileMenuButton.addEventListener('click', function() {
+mobileMenu.classList.toggle('hidden');
+});
+const navLinks = document.querySelectorAll('nav a, .mobile-menu a');
+navLinks.forEach(function(link) {
+link.addEventListener('click', function() {
+navLinks.forEach(function(navLink) {
+navLink.classList.remove('active');
+});
+this.classList.add('active');
+mobileMenu.classList.add('hidden');
+});
+});
+const sections = document.querySelectorAll('section');
+window.addEventListener('scroll', function() {
+let current = '';
+sections.forEach(function(section) {
+const sectionTop = section.offsetTop;
+const sectionHeight = section.clientHeight;
+if (pageYOffset >= (sectionTop - sectionHeight / 3)) {
+current = section.getAttribute('id');
+}
+});
+navLinks.forEach(function(link) {
+link.classList.remove('active');
+if (link.getAttribute('href') === '#' + current) {
+link.classList.add('active');
+}
+});
+});
+});
+</script>
+<script id="scrollScript">
+document.addEventListener('DOMContentLoaded', function() {
+const backToTop = document.getElementById('backToTop');
+window.addEventListener('scroll', function() {
+if (window.pageYOffset > 300) {
+backToTop.classList.add('visible');
+} else {
+backToTop.classList.remove('visible');
+}
+});
+backToTop.addEventListener('click', function() {
+window.scrollTo({
+top: 0,
+behavior: 'smooth'
+});
+});
+document.querySelectorAll('a[href^="#"]').forEach(function(anchor) {
+anchor.addEventListener('click', function(e) {
+e.preventDefault();
+const targetId = this.getAttribute('href');
+const targetElement = document.querySelector(targetId);
+window.scrollTo({
+top: targetElement.offsetTop - 80,
+behavior: 'smooth'
+});
+});
+});
+});
+</script>
+<script id="headerScrollScript">
+document.addEventListener('DOMContentLoaded', function() {
+const header = document.querySelector('header');
+window.addEventListener('scroll', function() {
+if (window.pageYOffset > 50) {
+header.classList.add('shadow-md');
+header.classList.remove('shadow-sm');
+} else {
+header.classList.remove('shadow-md');
+header.classList.add('shadow-sm');
+}
+});
+});
+</script>
 </body>
 </html>
-
