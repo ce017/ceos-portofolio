@@ -145,6 +145,78 @@ padding-right: 4px;
 white-space: nowrap;
 overflow: hidden;
 }
+
+/* Lightbox styles */
+.lightbox {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.9);
+    z-index: 1000;
+    justify-content: center;
+    align-items: center;
+}
+
+.lightbox.active {
+    display: flex;
+}
+
+.lightbox-content {
+    max-width: 90%;
+    max-height: 90%;
+    position: relative;
+}
+
+.lightbox-img {
+    max-width: 100%;
+    max-height: 90vh;
+    border-radius: 8px;
+}
+
+.lightbox-close {
+    position: absolute;
+    top: -40px;
+    right: 0;
+    background: none;
+    border: none;
+    color: white;
+    font-size: 2rem;
+    cursor: pointer;
+}
+
+.lightbox-nav {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(255, 255, 255, 0.2);
+    border: none;
+    color: white;
+    font-size: 2rem;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.3s;
+}
+
+.lightbox-nav:hover {
+    background: rgba(255, 255, 255, 0.4);
+}
+
+.lightbox-prev {
+    left: 20px;
+}
+
+.lightbox-next {
+    right: 20px;
+}
+
 @media (max-width: 768px) {
 .typing-container {
 font-size: 1.4rem;
@@ -459,125 +531,786 @@ height: 50px;
                 <!-- Main Base Images Grid -->
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
                     <div class="portfolio-item bg-gray-50 rounded-lg overflow-hidden shadow-md hover:shadow-lg transition-all duration-300">
-                        <img src="https://i.ibb.co/d49QM0QH/image.jpg" alt="Air Force Base Project" class="w-full h-48 object-cover">
+                        <img src="https://i.ibb.co/d49QM0QH.jpg" alt="Air Force Base Project" class="w-full h-48 object-cover">
                     </div>
                     <div class="portfolio-item bg-gray-50 rounded-lg overflow-hidden shadow-md hover:shadow-lg transition-all duration-300">
-                        <img src="https://i.ibb.co/SDF4pts7/image.jpg" alt="Air Force Base Project" class="w-full h-48 object-cover">
+                        <img src="https://i.ibb.co/SDF4pts7.jpg" alt="Air Force Base Project" class="w-full h-48 object-cover">
                     </div>
                     <div class="portfolio-item bg-gray-50 rounded-lg overflow-hidden shadow-md hover:shadow-lg transition-all duration-300">
-                        <img src="https://i.ibb.co/V01fNNxN/image.jpg" alt="Air Force Base Project" class="w-full h-48 object-cover">
+                        <img src="https://i.ibb.co/V01fNNxN.jpg" alt="Air Force Base Project" class="w-full h-48 object-cover">
                     </div>
                     <div class="portfolio-item bg-gray-50 rounded-lg overflow-hidden shadow-md hover:shadow-lg transition-all duration-300">
-                        <img src="https://i.ibb.co/p61GkJ8Z/image.jpg" alt="Air Force Base Project" class="w-full h-48 object-cover">
+                        <img src="https://i.ibb.co/p61GkJ8Z.jpg" alt="Air Force Base Project" class="w-full h-48 object-cover">
                     </div>
                     <div class="portfolio-item bg-gray-50 rounded-lg overflow-hidden shadow-md hover:shadow-lg transition-all duration-300">
-                        <img src="https://i.ibb.co/RkyVRWtm/image.jpg" alt="Air Force Base Project" class="w-full h-48 object-cover">
+                        <img src="https://i.ibb.co/RkyVRWtm.jpg" alt="Air Force Base Project" class="w-full h-48 object-cover">
                     </div>
                     <div class="portfolio-item bg-gray-50 rounded-lg overflow-hidden shadow-md hover:shadow-lg transition-all duration-300">
-                        <img src="https://i.ibb.co/39gZhJvg/image.jpg" alt="Air Force Base Project" class="w-full h-48 object-cover">
+                        <img src="https://i.ibb.co/39gZhJvg.jpg" alt="Air Force Base Project" class="w-full h-48 object-cover">
                     </div>
                     <div class="portfolio-item bg-gray-50 rounded-lg overflow-hidden shadow-md hover:shadow-lg transition-all duration-300">
-                        <img src="https://i.ibb.co/HDkXCf1r/image.jpg" alt="Air Force Base Project" class="w-full h-48 object-cover">
+                        <img src="https://i.ibb.co/HDkXCf1r.jpg" alt="Air Force Base Project" class="w-full h-48 object-cover">
                     </div>
                     <div class="portfolio-item bg-gray-50 rounded-lg overflow-hidden shadow-md hover:shadow-lg transition-all duration-300">
-                        <img src="https://i.ibb.co/hR5CXBy1/image.jpg" alt="Air Force Base Project" class="w-full h-48 object-cover">
+                        <img src="https://i.ibb.co/hR5CXBy1.jpg" alt="Air Force Base Project" class="w-full h-48 object-cover">
                     </div>
                     <div class="portfolio-item bg-gray-50 rounded-lg overflow-hidden shadow-md hover:shadow-lg transition-all duration-300">
-                        <img src="https://i.ibb.co/Q7wYz9td/image.jpg" alt="Air Force Base Project" class="w-full h-48 object-cover">
+                        <img src="https://i.ibb.co/Q7wYz9td.jpg" alt="Air Force Base Project" class="w-full h-48 object-cover">
                     </div>
                     <div class="portfolio-item bg-gray-50 rounded-lg overflow-hidden shadow-md hover:shadow-lg transition-all duration-300">
-                        <img src="https://i.ibb.co/BHq3GRwB/image.jpg" alt="Air Force Base Project" class="w-full h-48 object-cover">
+                        <img src="https://i.ibb.co/BHq3GRwB.jpg" alt="Air Force Base Project" class="w-full h-48 object-cover">
                     </div>
                     <div class="portfolio-item bg-gray-50 rounded-lg overflow-hidden shadow-md hover:shadow-lg transition-all duration-300">
-                        <img src="https://i.ibb.co/5h4tQLYs/image.jpg" alt="Air Force Base Project" class="w-full h-48 object-cover">
+                        <img src="https://i.ibb.co/5h4tQLYs.jpg" alt="Air Force Base Project" class="w-full h-48 object-cover">
                     </div>
                     <div class="portfolio-item bg-gray-50 rounded-lg overflow-hidden shadow-md hover:shadow-lg transition-all duration-300">
-                        <img src="https://i.ibb.co/nMYtVrtg/image.jpg" alt="Air Force Base Project" class="w-full h-48 object-cover">
+                        <img src="https://i.ibb.co/nMYtVrtg.jpg" alt="Air Force Base Project" class="w-full h-48 object-cover">
                     </div>
                     <div class="portfolio-item bg-gray-50 rounded-lg overflow-hidden shadow-md hover:shadow-lg transition-all duration-300">
-                        <img src="https://i.ibb.co/zTqYh70R/image.jpg" alt="Air Force Base Project" class="w-full h-48 object-cover">
+                        <img src="https://i.ibb.co/zTqYh70R.jpg" alt="Air Force Base Project" class="w-full h-48 object-cover">
                     </div>
                     <div class="portfolio-item bg-gray-50 rounded-lg overflow-hidden shadow-md hover:shadow-lg transition-all duration-300">
-                        <img src="https://i.ibb.co/sp4fQ6qN/image.jpg" alt="Air Force Base Project" class="w-full h-48 object-cover">
+                        <img src="https://i.ibb.co/sp4fQ6qN.jpg" alt="Air Force Base Project" class="w-full h-48 object-cover">
                     </div>
                     <div class="portfolio-item bg-gray-50 rounded-lg overflow-hidden shadow-md hover:shadow-lg transition-all duration-300">
-                        <img src="https://i.ibb.co/pkcnRjh/image.jpg" alt="Air Force Base Project" class="w-full h-48 object-cover">
+                        <img src="https://i.ibb.co/pkcnRjh.jpg" alt="Air Force Base Project" class="w-full h-48 object-cover">
                     </div>
                     <div class="portfolio-item bg-gray-50 rounded-lg overflow-hidden shadow-md hover:shadow-lg transition-all duration-300">
-                        <img src="https://i.ibb.co/yFYT26Xc/image.jpg" alt="Air Force Base Project" class="w-full h-48 object-cover">
+                        <img src="https://i.ibb.co/yFYT26Xc.jpg" alt="Air Force Base Project" class="w-full h-48 object-cover">
                     </div>
                     <div class="portfolio-item bg-gray-50 rounded-lg overflow-hidden shadow-md hover:shadow-lg transition-all duration-300">
-                        <img src="https://i.ibb.co/RTf9G2Gf/image.jpg" alt="Air Force Base Project" class="w-full h-48 object-cover">
+                        <img src="https://i.ibb.co/RTf9G2Gf.jpg" alt="Air Force Base Project" class="w-full h-48 object-cover">
                     </div>
                     <div class="portfolio-item bg-gray-50 rounded-lg overflow-hidden shadow-md hover:shadow-lg transition-all duration-300">
-                        <img src="https://i.ibb.co/0pGY60kz/image.jpg" alt="Air Force Base Project" class="w-full h-48 object-cover">
+                        <img src="https://i.ibb.co/0pGY60kz.jpg" alt="Air Force Base Project" class="w-full h-48 object-cover">
                     </div>
                     <div class="portfolio-item bg-gray-50 rounded-lg overflow-hidden shadow-md hover:shadow-lg transition-all duration-300">
-                        <img src="https://i.ibb.co/S75QdDd2/image.jpg" alt="Air Force Base Project" class="w-full h-48 object-cover">
+                        <img src="https://i.ibb.co/S75QdDd2.jpg" alt="Air Force Base Project" class="w-full h-48 object-cover">
                     </div>
                     <div class="portfolio-item bg-gray-50 rounded-lg overflow-hidden shadow-md hover:shadow-lg transition-all duration-300">
-                        <img src="https://i.ibb.co/sp12s7d8/image.jpg" alt="Air Force Base Project" class="w-full h-48 object-cover">
+                        <img src="https://i.ibb.co/sp12s7d8.jpg" alt="Air Force Base Project" class="w-full h-48 object-cover">
                     </div>
                     <div class="portfolio-item bg-gray-50 rounded-lg overflow-hidden shadow-md hover:shadow-lg transition-all duration-300">
-                        <img src="https://i.ibb.co/3m651gTB/image.jpg" alt="Air Force Base Project" class="w-full h-48 object-cover">
+                        <img src="https://i.ibb.co/3m651gTB.jpg" alt="Air Force Base Project" class="w-full h-48 object-cover">
                     </div>
                     <div class="portfolio-item bg-gray-50 rounded-lg overflow-hidden shadow-md hover:shadow-lg transition-all duration-300">
-                        <img src="https://i.ibb.co/MyK6PM1k/image.jpg" alt="Air Force Base Project" class="w-full h-48 object-cover">
+                        <img src="https://i.ibb.co/MyK6PM1k.jpg" alt="Air Force Base Project" class="w-full h-48 object-cover">
                     </div>
                     <div class="portfolio-item bg-gray-50 rounded-lg overflow-hidden shadow-md hover:shadow-lg transition-all duration-300">
-                        <img src="https://i.ibb.co/mVf0VcX4/image.jpg" alt="Air Force Base Project" class="w-full h-48 object-cover">
+                        <img src="https://i.ibb.co/mVf0VcX4.jpg" alt="Air Force Base Project" class="w-full h-48 object-cover">
                     </div>
                     <div class="portfolio-item bg-gray-50 rounded-lg overflow-hidden shadow-md hover:shadow-lg transition-all duration-300">
-                        <img src="https://i.ibb.co/3y0NtBcx/image.jpg" alt="Air Force Base Project" class="w-full h-48 object-cover">
+                        <img src="https://i.ibb.co/3y0NtBcx.jpg" alt="Air Force Base Project" class="w-full h-48 object-cover">
                     </div>
                     <div class="portfolio-item bg-gray-50 rounded-lg overflow-hidden shadow-md hover:shadow-lg transition-all duration-300">
-                        <img src="https://i.ibb.co/v4wyLBbm/image.jpg" alt="Air Force Base Project" class="w-full h-48 object-cover">
+                        <img src="https://i.ibb.co/v4wyLBbm.jpg" alt="Air Force Base Project" class="w-full h-48 object-cover">
                     </div>
                     <div class="portfolio-item bg-gray-50 rounded-lg overflow-hidden shadow-md hover:shadow-lg transition-all duration-300">
-                        <img src="https://i.ibb.co/YTqBSv7q/image.jpg" alt="Air Force Base Project" class="w-full h-48 object-cover">
+                        <img src="https://i.ibb.co/YTqBSv7q.jpg" alt="Air Force Base Project" class="w-full h-48 object-cover">
                     </div>
                     <div class="portfolio-item bg-gray-50 rounded-lg overflow-hidden shadow-md hover:shadow-lg transition-all duration-300">
-                        <img src="https://i.ibb.co/SLD8yyr/image.jpg" alt="Air Force Base Project" class="w-full h-48 object-cover">
+                        <img src="https://i.ibb.co/SLD8yyr.jpg" alt="Air Force Base Project" class="w-full h-48 object-cover">
                     </div>
                     <div class="portfolio-item bg-gray-50 rounded-lg overflow-hidden shadow-md hover:shadow-lg transition-all duration-300">
-                        <img src="https://i.ibb.co/Pzcj946G/image.jpg" alt="Air Force Base Project" class="w-full h-48 object-cover">
+                        <img src="https://i.ibb.co/Pzcj946G.jpg" alt="Air Force Base Project" class="w-full h-48 object-cover">
                     </div>
                     <div class="portfolio-item bg-gray-50 rounded-lg overflow-hidden shadow-md hover:shadow-lg transition-all duration-300">
-                        <img src="https://i.ibb.co/JRTmFkwc/image.jpg" alt="Air Force Base Project" class="w-full h-48 object-cover">
+                        <img src="https://i.ibb.co/JRTmFkwc.jpg" alt="Air Force Base Project" class="w-full h-48 object-cover">
                     </div>
                     <div class="portfolio-item bg-gray-50 rounded-lg overflow-hidden shadow-md hover:shadow-lg transition-all duration-300">
-                        <img src="https://i.ibb.co/YBQPzLkM/image.jpg" alt="Air Force Base Project" class="w-full h-48 object-cover">
+                        <img src="https://i.ibb.co/YBQPzLkM.jpg" alt="Air Force Base Project" class="w-full h-48 object-cover">
                     </div>
                     <div class="portfolio-item bg-gray-50 rounded-lg overflow-hidden shadow-md hover:shadow-lg transition-all duration-300">
-                        <img src="https://i.ibb.co/JFkCb4Jw/image.jpg" alt="Air Force Base Project" class="w-full h-48 object-cover">
+                        <img src="https://i.ibb.co/JFkCb4Jw.jpg" alt="Air Force Base Project" class="w-full h-48 object-cover">
                     </div>
                     <div class="portfolio-item bg-gray-50 rounded-lg overflow-hidden shadow-md hover:shadow-lg transition-all duration-300">
-                        <img src="https://i.ibb.co/Fkzmwtc2/image.jpg" alt="Air Force Base Project" class="w-full h-48 object-cover">
+                        <img src="https://i.ibb.co/Fkzmwtc2.jpg" alt="Air Force Base Project" class="w-full h-48 object-cover">
                     </div>
                     <div class="portfolio-item bg-gray-50 rounded-lg overflow-hidden shadow-md hover:shadow-lg transition-all duration-300">
-                        <img src="https://i.ibb.co/8Dz6S9zq/image.jpg" alt="Air Force Base Project" class="w-full h-48 object-cover">
+                        <img src="https://i.ibb.co/8Dz6S9zq.jpg" alt="Air Force Base Project" class="w-full h-48 object-cover">
                     </div>
                     <div class="portfolio-item bg-gray-50 rounded-lg overflow-hidden shadow-md hover:shadow-lg transition-all duration-300">
-                        <img src="https://i.ibb.co/DHG4tMnz/image.jpg" alt="Air Force Base Project" class="w-full h-48 object-cover">
+                        <img src="https://i.ibb.co/DHG4tMnz.jpg" alt="Air Force Base Project" class="w-full h-48 object-cover">
                     </div>
                     <div class="portfolio-item bg-gray-50 rounded-lg overflow-hidden shadow-md hover:shadow-lg transition-all duration-300">
-                        <img src="https://i.ibb.co/spv474HL/image.jpg" alt="Air Force Base Project" class="w-full h-48 object-cover">
+                        <img src="https://i.ibb.co/spv474HL.jpg" alt="Air Force Base Project" class="w-full h-48 object-cover">
                     </div>
                     <div class="portfolio-item bg-gray-50 rounded-lg overflow-hidden shadow-md hover:shadow-lg transition-all duration-300">
-                        <img src="https://i.ibb.co/XrqSXVXm/image.jpg" alt="Air Force Base Project" class="w-full h-48 object-cover">
+                        <img src="https://i.ibb.co/XrqSXVXm.jpg" alt="Air Force Base Project" class="w-full h-48 object-cover">
                     </div>
                     <div class="portfolio-item bg-gray-50 rounded-lg overflow-hidden shadow-md hover:shadow-lg transition-all duration-300">
-                        <img src="https://i.ibb.co/m5BWCCNz/image.jpg" alt="Air Force Base Project" class="w-full h-48 object-cover">
+                        <img src="https://i.ibb.co/m5BWCCNz.jpg" alt="Air Force Base Project" class="w-full h-48 object-cover">
                     </div>
                     <div class="portfolio-item bg-gray-50 rounded-lg overflow-hidden shadow-md hover:shadow-lg transition-all duration-300">
-                        <img src="https://i.ibb.co/hv11Chf/image.jpg" alt="Air Force Base Project" class="w-full h-48 object-cover">
+                        <img src="https://i.ibb.co/hv11Chf.jpg" alt="Air Force Base Project" class="w-full h-48 object-cover">
                     </div>
                     <div class="portfolio-item bg-gray-50 rounded-lg overflow-hidden shadow-md hover:shadow-lg transition-all duration-300">
-                        <img src="https://i.ibb.co/bjSWpLc0/image.jpg" alt="Air Force Base Project" class="w-full h-48 object-cover">
+                        <img src="https://i.ibb.co/bjSWpLc0.jpg" alt="Air Force Base Project" class="w-full h-48 object-cover">
                     </div>
                     <div class="portfolio-item bg-gray-50 rounded-lg overflow-hidden shadow-md hover:shadow-lg transition-all duration-300">
-                        <img src="https://i.ibb.co/qMsBZ9MJ/image.jpg" alt="Air Force Base Project" class="w-full h-48 object-cover">
+                        <img src="https://i.ibb.co/qMsBZ9MJ.jpg" alt="Air Force Base Project" class="w-full h-48 object-cover">
                     </div>
                     <div class="portfolio-item bg-gray-50 rounded-lg overflow-hidden shadow-md hover:shadow-lg transition-all duration-300">
-                        <img src="https://i.ibb.co/fd8MBgh2/image.jpg" alt="Air Force Base Project" class="w-full h-48 object-cover">
-                   
+                        <img src="https://i.ibb.co/fd8MBgh2.jpg" alt="Air Force Base Project" class="w-full h-48 object-cover">
+                    </div>
+                    <div class="portfolio-item bg-gray-50 rounded-lg overflow-hidden shadow-md hover:shadow-lg transition-all duration-300">
+                        <img src="https://i.ibb.co/G4G581Tc.jpg" alt="Air Force Base Project" class="w-full h-48 object-cover">
+                    </div>
+                    <div class="portfolio-item bg-gray-50 rounded-lg overflow-hidden shadow-md hover:shadow-lg transition-all duration-300">
+                        <img src="https://i.ibb.co/rKXQ216v.jpg" alt="Air Force Base Project" class="w-full h-48 object-cover">
+                    </div>
+                    <div class="portfolio-item bg-gray-50 rounded-lg overflow-hidden shadow-md hover:shadow-lg transition-all duration-300">
+                        <img src="https://i.ibb.co/dw1dgYTM.jpg" alt="Air Force Base Project" class="w-full h-48 object-cover">
+                    </div>
+                    <div class="portfolio-item bg-gray-50 rounded-lg overflow-hidden shadow-md hover:shadow-lg transition-all duration-300">
+                        <img src="https://i.ibb.co/Fkq1p7Lf.jpg" alt="Air Force Base Project" class="w-full h-48 object-cover">
+                    </div>
+                    <div class="portfolio-item bg-gray-50 rounded-lg overflow-hidden shadow-md hover:shadow-lg transition-all duration-300">
+                        <img src="https://i.ibb.co/C51wgtqk.jpg" alt="Air Force Base Project" class="w-full h-48 object-cover">
+                    </div>
+                    <div class="portfolio-item bg-gray-50 rounded-lg overflow-hidden shadow-md hover:shadow-lg transition-all duration-300">
+                        <img src="https://i.ibb.co/SzHWPhF.jpg" alt="Air Force Base Project" class="w-full h-48 object-cover">
+                    </div>
+                    <div class="portfolio-item bg-gray-50 rounded-lg overflow-hidden shadow-md hover:shadow-lg transition-all duration-300">
+                        <img src="https://i.ibb.co/JwcQfz1s.jpg" alt="Air Force Base Project" class="w-full h-48 object-cover">
+                    </div>
+                    <div class="portfolio-item bg-gray-50 rounded-lg overflow-hidden shadow-md hover:shadow-lg transition-all duration-300">
+                        <img src="https://i.ibb.co/XfDSrvSr.jpg" alt="Air Force Base Project" class="w-full h-48 object-cover">
+                    </div>
+                    <div class="portfolio-item bg-gray-50 rounded-lg overflow-hidden shadow-md hover:shadow-lg transition-all duration-300">
+                        <img src="https://i.ibb.co/ZzHvCSK4.jpg" alt="Air Force Base Project" class="w-full h-48 object-cover">
+                    </div>
+                    <div class="portfolio-item bg-gray-50 rounded-lg overflow-hidden shadow-md hover:shadow-lg transition-all duration-300">
+                        <img src="https://i.ibb.co/9mMQTggH.jpg" alt="Air Force Base Project" class="w-full h-48 object-cover">
+                    </div>
+                    <div class="portfolio-item bg-gray-50 rounded-lg overflow-hidden shadow-md hover:shadow-lg transition-all duration-300">
+                        <img src="https://i.ibb.co/dJ1QczcH.jpg" alt="Air Force Base Project" class="w-full h-48 object-cover">
+                    </div>
+                    <div class="portfolio-item bg-gray-50 rounded-lg overflow-hidden shadow-md hover:shadow-lg transition-all duration-300">
+                        <img src="https://i.ibb.co/yFL12X4t.jpg" alt="Air Force Base Project" class="w-full h-48 object-cover">
+                    </div>
+                    <div class="portfolio-item bg-gray-50 rounded-lg overflow-hidden shadow-md hover:shadow-lg transition-all duration-300">
+                        <img src="https://i.ibb.co/yF7BBwjt.jpg" alt="Air Force Base Project" class="w-full h-48 object-cover">
+                    </div>
+                    <div class="portfolio-item bg-gray-50 rounded-lg overflow-hidden shadow-md hover:shadow-lg transition-all duration-300">
+                        <img src="https://i.ibb.co/s9LND4Th.jpg" alt="Air Force Base Project" class="w-full h-48 object-cover">
+                    </div>
+                    <div class="portfolio-item bg-gray-50 rounded-lg overflow-hidden shadow-md hover:shadow-lg transition-all duration-300">
+                        <img src="https://i.ibb.co/1Y97np6P.jpg" alt="Air Force Base Project" class="w-full h-48 object-cover">
+                    </div>
+                    <div class="portfolio-item bg-gray-50 rounded-lg overflow-hidden shadow-md hover:shadow-lg transition-all duration-300">
+                        <img src="https://i.ibb.co/XxJdhZz1.jpg" alt="Air Force Base Project" class="w-full h-48 object-cover">
+                    </div>
+                    <div class="portfolio-item bg-gray-50 rounded-lg overflow-hidden shadow-md hover:shadow-lg transition-all duration-300">
+                        <img src="https://i.ibb.co/pB4Rqvf6.jpg" alt="Air Force Base Project" class="w-full h-48 object-cover">
+                    </div>
+                    <div class="portfolio-item bg-gray-50 rounded-lg overflow-hidden shadow-md hover:shadow-lg transition-all duration-300">
+                        <img src="https://i.ibb.co/LXcDVq5r.jpg" alt="Air Force Base Project" class="w-full h-48 object-cover">
+                    </div>
+                    <div class="portfolio-item bg-gray-50 rounded-lg overflow-hidden shadow-md hover:shadow-lg transition-all duration-300">
+                        <img src="https://i.ibb.co/S1Dgd91.jpg" alt="Air Force Base Project" class="w-full h-48 object-cover">
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Halloween Update -->
+            <div class="text-center mb-12">
+                <h4 class="text-xl font-semibold mb-4">Seasonal Updates</h4>
+                <p class="text-gray-600 italic mb-6">"Halloween update of 2025"</p>
+                
+                <!-- Halloween Images Grid -->
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
+                    <div class="portfolio-item bg-gray-50 rounded-lg overflow-hidden shadow-md hover:shadow-lg transition-all duration-300">
+                        <img src="https://i.ibb.co/4ZBcypk1.jpg" alt="Halloween Update 2025" class="w-full h-48 object-cover">
+                    </div>
+                    <div class="portfolio-item bg-gray-50 rounded-lg overflow-hidden shadow-md hover:shadow-lg transition-all duration-300">
+                        <img src="https://i.ibb.co/ZR1BVSqS.jpg" alt="Halloween Update 2025" class="w-full h-48 object-cover">
+                    </div>
+                    <div class="portfolio-item bg-gray-50 rounded-lg overflow-hidden shadow-md hover:shadow-lg transition-all duration-300">
+                        <img src="https://i.ibb.co/99T0LNjK.jpg" alt="Halloween Update 2025" class="w-full h-48 object-cover">
+                    </div>
+                    <div class="portfolio-item bg-gray-50 rounded-lg overflow-hidden shadow-md hover:shadow-lg transition-all duration-300">
+                        <img src="https://i.ibb.co/HTHByQc8.jpg" alt="Halloween Update 2025" class="w-full h-48 object-cover">
+                    </div>
+                    <div class="portfolio-item bg-gray-50 rounded-lg overflow-hidden shadow-md hover:shadow-lg transition-all duration-300">
+                        <img src="https://i.ibb.co/Gf1rx9RQ.jpg" alt="Halloween Update 2025" class="w-full h-48 object-cover">
+                    </div>
+                    <div class="portfolio-item bg-gray-50 rounded-lg overflow-hidden shadow-md hover:shadow-lg transition-all duration-300">
+                        <img src="https://i.ibb.co/ymKsmHL6.jpg" alt="Halloween Update 2025" class="w-full h-48 object-cover">
+                    </div>
+                    <div class="portfolio-item bg-gray-50 rounded-lg overflow-hidden shadow-md hover:shadow-lg transition-all duration-300">
+                        <img src="https://i.ibb.co/4RdCg04H.jpg" alt="Halloween Update 2025" class="w-full h-48 object-cover">
+                    </div>
+                    <div class="portfolio-item bg-gray-50 rounded-lg overflow-hidden shadow-md hover:shadow-lg transition-all duration-300">
+                        <img src="https://i.ibb.co/Z1HbVFDD.jpg" alt="Halloween Update 2025" class="w-full h-48 object-cover">
+                    </div>
+                    <div class="portfolio-item bg-gray-50 rounded-lg overflow-hidden shadow-md hover:shadow-lg transition-all duration-300">
+                        <img src="https://i.ibb.co/rRxKdpg1.jpg" alt="Halloween Update 2025" class="w-full h-48 object-cover">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Framework Setup -->
+            <div class="text-center">
+                <h4 class="text-xl font-semibold mb-4">Framework Setup & Customization</h4>
+                
+                <!-- Framework Images Grid -->
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-4">
+                    <div class="portfolio-item bg-gray-50 rounded-lg overflow-hidden shadow-md hover:shadow-lg transition-all duration-300">
+                        <img src="https://i.ibb.co/QvDXRy73.jpg" alt="Framework Setup" class="w-full h-48 object-cover">
+                    </div>
+                    <div class="portfolio-item bg-gray-50 rounded-lg overflow-hidden shadow-md hover:shadow-lg transition-all duration-300">
+                        <img src="https://i.ibb.co/h1ZqmxKR.jpg" alt="Framework Setup" class="w-full h-48 object-cover">
+                    </div>
+                    <div class="portfolio-item bg-gray-50 rounded-lg overflow-hidden shadow-md hover:shadow-lg transition-all duration-300">
+                        <img src="https://i.ibb.co/VYs1TbKD.jpg" alt="Framework Setup" class="w-full h-48 object-cover">
+                    </div>
+                    <div class="portfolio-item bg-gray-50 rounded-lg overflow-hidden shadow-md hover:shadow-lg transition-all duration-300">
+                        <img src="https://i.ibb.co/MygTxvbM.jpg" alt="Framework Setup" class="w-full h-48 object-cover">
+                    </div>
+                    <div class="portfolio-item bg-gray-50 rounded-lg overflow-hidden shadow-md hover:shadow-lg transition-all duration-300">
+                        <img src="https://i.ibb.co/SXBRbBT1.jpg" alt="Framework Setup" class="w-full h-48 object-cover">
+                    </div>
+                </div>
+                <p class="text-gray-500 text-sm italic mb-8">
+                    <i class="ri-information-line mr-1"></i>
+                    I did not create the framework, that is Kronos' work. I only set it up and customized it for the game, which is still a lot of work.
+                </p>
+            </div>
+        </div>
+
+        <div class="flex justify-center mt-12">
+            <a href="#awards" class="px-6 py-3 bg-primary text-white rounded-button shadow-md hover:bg-opacity-90 transition-all duration-300 whitespace-nowrap">
+                View My Awards
+            </a>
+        </div>
+    </div>
+</section>
+
+<section id="awards" class="section py-20 bg-white">
+<div class="container mx-auto px-4">
+<h2 class="text-3xl font-bold text-center mb-12">Military Awards & Decorations</h2>
+<div class="max-w-4xl mx-auto">
+<div class="bg-white p-8 rounded-lg shadow-md">
+<div class="mb-8">
+<h3 class="text-xl font-bold text-gray-800 mb-4">USAR</h3>
+<h4 class="text-lg font-semibold text-gray-700 mb-3">Badges</h4>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+<div class="space-y-2">
+<div class="flex items-center space-x-2">
+<i class="ri-medal-line text-primary"></i>
+<span>Special Operations Diver</span>
+</div>
+<div class="flex items-center space-x-2">
+<i class="ri-medal-line text-primary"></i>
+<span>1ID, SOAR, JFK, ASF CSIB</span>
+</div>
+<div class="flex items-center space-x-2">
+<i class="ri-medal-line text-primary"></i>
+<span>Basic Military Freefall Badge</span>
+</div>
+<div class="flex items-center space-x-2">
+<i class="ri-medal-line text-primary"></i>
+<span>Army Pathfinder Badge</span>
+</div>
+<div class="flex items-center space-x-2">
+<i class="ri-medal-line text-primary"></i>
+<span>Ranger Tab</span>
+</div>
+<div class="flex items-center space-x-2">
+<i class="ri-medal-line text-primary"></i>
+<span>Master Parachutist Badge</span>
+</div>
+</div>
+<div class="space-y-2">
+<div class="flex items-center space-x-2">
+<i class="ri-medal-line text-primary"></i>
+<span>Expert Marksman Qualification Badge</span>
+</div>
+<div class="flex items-center space-x-2">
+<i class="ri-medal-line text-primary"></i>
+<span>3 Overseas Bars</span>
+</div>
+<div class="flex items-center space-x-2">
+<i class="ri-medal-line text-primary"></i>
+<span>Army Air Assault Badge</span>
+</div>
+<div class="flex items-center space-x-2">
+<i class="ri-medal-line text-primary"></i>
+<span>Basic Parachutist Badge</span>
+</div>
+<div class="flex items-center space-x-2">
+<i class="ri-medal-line text-primary"></i>
+<span>Combat Action Badge</span>
+</div>
+<div class="flex items-center space-x-2">
+<i class="ri-medal-line text-primary"></i>
+<span>Combat Infantryman Badge x2</span>
+</div>
+<div class="flex items-center space-x-2">
+<i class="ri-medal-line text-primary"></i>
+<span>Joint Chiefs Of Staff Identification Badge</span>
+</div>
+<div class="flex items-center space-x-2">
+<i class="ri-medal-line text-primary"></i>
+<span>Headquarters Identification Badge</span>
+</div>
+<div class="flex items-center space-x-2">
+<i class="ri-medal-line text-primary"></i>
+<span>Gold Aiguillette</span>
+</div>
+</div>
+</div>
+</div>
+<div class="mb-8">
+<h4 class="text-lg font-semibold text-gray-700 mb-3">Ribbons</h4>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+<div class="space-y-2">
+<div class="flex items-center space-x-2">
+<i class="ri-award-line text-primary"></i>
+<span>Antarctica Service</span>
+</div>
+<div class="flex items-center space-x-2">
+<i class="ri-award-line text-primary"></i>
+<span>National Defense Service</span>
+</div>
+<div class="flex items-center space-x-2">
+<i class="ri-award-line text-primary"></i>
+<span>Global War on Terrorism</span>
+</div>
+</div>
+<div class="space-y-2">
+<div class="flex items-center space-x-2">
+<i class="ri-award-line text-primary"></i>
+<span>NCO Professional Development</span>
+</div>
+<div class="flex items-center space-x-2">
+<i class="ri-award-line text-primary"></i>
+<span>Army Service</span>
+</div>
+</div>
+</div>
+</div>
+<div class="mt-12">
+<h3 class="text-xl font-bold text-gray-800 mb-4">USAF</h3>
+<div class="mb-8">
+<h4 class="text-lg font-semibold text-gray-700 mb-3">Badges</h4>
+<div class="space-y-2">
+<div class="flex items-center space-x-2">
+<i class="ri-medal-line text-primary"></i>
+<span>Master Pilot Wings</span>
+</div>
+</div>
+</div>
+<div>
+<h4 class="text-lg font-semibold text-gray-700 mb-3">Ribbons</h4>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+<div class="space-y-2">
+<div class="flex items-center space-x-2">
+<i class="ri-award-line text-primary"></i>
+<span>Air Force Longevity Service</span>
+</div>
+<div class="flex items-center space-x-2">
+<i class="ri-award-line text-primary"></i>
+<span>Air Force Good Conduct</span>
+</div>
+<div class="flex items-center space-x-2">
+<i class="ri-award-line text-primary"></i>
+<span>Outstanding Airman Award (of the month)</span>
+</div>
+<div class="flex items-center space-x-2">
+<i class="ri-award-line text-primary"></i>
+<span>Air Force Commendation</span>
+</div>
+</div>
+<div class="space-y-2">
+<div class="flex items-center space-x-2">
+<i class="ri-award-line text-primary"></i>
+<span>Global War on Terrorism Service</span>
+</div>
+<div class="flex items-center space-x-2">
+<i class="ri-award-line text-primary"></i>
+<span>Armed Forces Service</span>
+</div>
+<div class="flex items-center space-x-2">
+<i class="ri-award-line text-primary"></i>
+<span>NCO Professional Development</span>
+</div>
+<div class="flex items-center space-x-2">
+<i class="ri-award-line text-primary"></i>
+<span>Air Force Recruiter</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="flex justify-center mt-12">
+<a href="#skills" class="px-6 py-3 bg-primary text-white rounded-button shadow-md hover:bg-opacity-90 transition-all duration-300 whitespace-nowrap">View My Skills</a>
+</div>
+</div>
+</div>
+</section>
+
+<section id="skills" class="section py-20 bg-gray-50">
+<div class="container mx-auto px-4">
+<h2 class="text-3xl font-bold text-center mb-12">Skills</h2>
+<div class="max-w-2xl mx-auto bg-white p-8 rounded-lg shadow-md">
+<p class="text-lg leading-relaxed text-gray-700">
+I've built leadership, communication, collaboration, and teamwork skills from courses I took at a research center in Northern Italy. Working on group projects helped me learn how to manage tasks, lead, and communicate effectively.
+</p>
+<div class="mt-8 grid grid-cols-1 md:grid-cols-2 gap-6">
+<div class="bg-gray-50 p-4 rounded-lg">
+<h3 class="text-lg font-semibold mb-3 text-primary">Leadership</h3>
+<div class="w-full bg-gray-200 rounded-full h-2.5">
+<div class="bg-primary h-2.5 rounded-full" style="width: 95%"></div>
+</div>
+</div>
+<div class="bg-gray-50 p-4 rounded-lg">
+<h3 class="text-lg font-semibold mb-3 text-primary">Communication</h3>
+<div class="w-full bg-gray-200 rounded-full h-2.5">
+<div class="bg-primary h-2.5 rounded-full" style="width: 90%"></div>
+</div>
+</div>
+<div class="bg-gray-50 p-4 rounded-lg">
+<h3 class="text-lg font-semibold mb-3 text-primary">Collaboration</h3>
+<div class="w-full bg-gray-200 rounded-full h-2.5">
+<div class="bg-primary h-2.5 rounded-full" style="width: 85%"></div>
+</div>
+</div>
+<div class="bg-gray-50 p-4 rounded-lg">
+<h3 class="text-lg font-semibold mb-3 text-primary">Teamwork</h3>
+<div class="w-full bg-gray-200 rounded-full h-2.5">
+<div class="bg-primary h-2.5 rounded-full" style="width: 92%"></div>
+</div>
+</div>
+</div>
+</div>
+<div class="flex justify-center mt-12">
+<a href="#contact" class="px-6 py-3 bg-primary text-white rounded-button shadow-md hover:bg-opacity-90 transition-all duration-300 whitespace-nowrap">Contact Me</a>
+</div>
+</div>
+</section>
+
+<section id="contact" class="section py-20 bg-white">
+<div class="container mx-auto px-4">
+<h2 class="text-3xl font-bold text-center mb-12">Contact</h2>
+<div class="max-w-lg mx-auto bg-white p-8 rounded-lg shadow-md">
+<div class="grid grid-cols-1 gap-6">
+<a href="https://discord.com/users/694228874535633057" target="_blank" class="flex items-center justify-between p-4 bg-gray-50 rounded-lg hover:bg-gray-100 transition-all duration-300">
+<div class="flex items-center">
+<div class="w-10 h-10 flex items-center justify-center bg-[#5865F2] text-white rounded-full">
+<img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMjcuMTQgOTYuMzYiPjxnPjxwYXRoIGQ9Ik0xMDcuNyA4LjA3QTEwNS4xNSAxMDUuMTUgMCAwIDAgODEuNDcgMGE3Mi4wNiA3Mi4wNiAwIDAgMC0zLjM2IDguNjUgOTcuNjggOTcuNjggMCAwIDAtMjkuMTEgMEE3Mi4zNyA3Mi4zNyAwIDAgMCA0NS42MyAwYTEwNS44OSAxMDUuODkgMCAwIDAtMjYuMjUgOC4wOUMyLjc5IDMyLjY1LTEuNzEgNTYuNi41NCAxODAuMTNhMTA4LjMyIDEwOC4zMiAwIDAgMCAzMy42IDE2LjE1IDgxLjQ0IDgxLjQ0IDAgMCAwIDcuMDgtMTEuNTEgNjguNzggNjguNzggMCAwIDEtMTEuMTItNS4zMSA2OC40OSA2OC40OSAwIDAgMCAxLjE3LS45MiA3Ny4zOSA3Ny4zOSAwIDAgMCA2Ni4wNSAwYy4zOS4zMi43Ny42NS0xLjE2LjkyYTY4LjU3IDY4LjU3IDAgMCAxLTExLjEyIDUuMzFhODEuMjMgODEuMjMgMCAwIDAgNy4wOCAxMS41MWM4LjY5IDQuMTggMTguMDkgNi4zMSAyNy44MSA2LjMxYTEwOC4zMiAxMDguMzIgMCAwIDAgMzMuNi0xNi4xNWMuMzUtMjAuNzggMS41NS00MS4zNiAzLjQ2LTYxLjc0QTEwNS4xNSAxMDUuMTUgMCAwIDAgMTA3LjcgOC4wN3oiIGZpbGw9IiM1ODY1ZjIiLz48L2c+PC9zdmc+" alt="Discord" class="w-6 h-6">
+</div>
+<span class="ml-4 text-gray-800 font-medium">Discord</span>
+</div>
+<i class="ri-arrow-right-line ri-lg text-gray-500"></i>
+</a>
+<a href="https://t.me/lce17" target="_blank" class="flex items-center justify-between p-4 bg-gray-50 rounded-lg hover:bg-gray-100 transition-all duration-300">
+<div class="flex items-center">
+<div class="w-10 h-10 flex items-center justify-center bg-[#0088cc] text-white rounded-full">
+<i class="ri-telegram-fill ri-lg"></i>
+</div>
+<span class="ml-4 text-gray-800 font-medium">Telegram</span>
+</div>
+<i class="ri-arrow-right-line ri-lg text-gray-500"></i>
+</a>
+</div>
+</div>
+<div class="flex justify-center mt-12">
+<a href="#home" class="px-6 py-3 bg-primary text-white rounded-button shadow-md hover:bg-opacity-90 transition-all duration-300 whitespace-nowrap">Back to Home</a>
+</div>
+</div>
+</section>
+</main>
+<footer class="bg-white py-8 border-t border-gray-200">
+<div class="container mx-auto px-4 text-center">
+<p class="text-gray-600">© 2025 Ceo's Portfolio. All rights reserved.</p>
+<p class="text-gray-500 text-sm mt-2">Last updated: June 22, 2025</p>
+</div>
+</footer>
+<button class="back-to-top w-12 h-12 bg-primary text-white rounded-full shadow-lg flex items-center justify-center" id="backToTop">
+<i class="ri-arrow-up-line ri-lg"></i>
+</button>
+
+<!-- Lightbox HTML -->
+<div class="lightbox" id="lightbox">
+    <button class="lightbox-close" id="lightboxClose">
+        <i class="ri-close-line"></i>
+    </button>
+    <button class="lightbox-nav lightbox-prev" id="lightboxPrev">
+        <i class="ri-arrow-left-line"></i>
+    </button>
+    <button class="lightbox-nav lightbox-next" id="lightboxNext">
+        <i class="ri-arrow-right-line"></i>
+    </button>
+    <div class="lightbox-content">
+        <img class="lightbox-img" id="lightboxImg" src="" alt="">
+    </div>
+</div>
+
+<script>
+// ===== TYPING ANIMATION =====
+const typingWords = [
+    "I'm a developer",
+    "I'm a graphic artist", 
+    "I'm a builder",
+    "I'm a scripter",
+    "I'm a community manager",
+    "I'm a student",
+    "I'm a economics enthusiast"
+];
+let typingWordIndex = 0;
+let typingCharIndex = 0;
+let isDeleting = false;
+let typingSpeed = 100;
+
+function type() {
+    const currentWord = typingWords[typingWordIndex];
+    const typingElement = document.getElementById('typing-text');
+    
+    if (isDeleting) {
+        // Remove characters
+        typingElement.textContent = currentWord.substring(0, typingCharIndex - 1);
+        typingCharIndex--;
+        typingSpeed = 50; // Faster when deleting
+    } else {
+        // Add characters
+        typingElement.textContent = currentWord.substring(0, typingCharIndex + 1);
+        typingCharIndex++;
+        typingSpeed = 100; // Normal speed when typing
+    }
+    
+    // Check if word is complete
+    if (!isDeleting && typingCharIndex === currentWord.length) {
+        isDeleting = true;
+        typingSpeed = 1000; // Pause at end of word
+    } else if (isDeleting && typingCharIndex === 0) {
+        isDeleting = false;
+        typingWordIndex = (typingWordIndex + 1) % typingWords.length;
+        typingSpeed = 500; // Pause before starting next word
+    }
+    
+    setTimeout(type, typingSpeed);
+}
+
+// ===== PARTICLE EFFECTS =====
+function createParticles() {
+    const particleCount = 50;
+    
+    for (let i = 0; i < particleCount; i++) {
+        createParticle();
+    }
+}
+
+function createParticle() {
+    const particle = document.createElement('div');
+    particle.classList.add('particle');
+    
+    // Random properties
+    const size = Math.random() * 5 + 2;
+    const posX = Math.random() * window.innerWidth;
+    const duration = Math.random() * 15000 + 8000;
+    
+    // Wind effect - particles move horizontally as they fall
+    const windStrength = (Math.random() * 15 + 5) * (Math.random() > 0.5 ? 1 : -1);
+    
+    // Apply properties
+    particle.style.width = `${size}px`;
+    particle.style.height = `${size}px`;
+    particle.style.left = `${posX}px`;
+    particle.style.top = `-10px`;
+    
+    // Random shape
+    particle.style.borderRadius = Math.random() > 0.7 ? '2px' : '50%';
+    
+    // Color based on primary color with variations
+    const colorVariations = [
+        '#6366f1', '#7477f0', '#8183f2', '#6d70f3', '#5c5fee'
+    ];
+    particle.style.background = colorVariations[Math.floor(Math.random() * colorVariations.length)];
+    
+    // Add subtle shadow for depth
+    particle.style.boxShadow = `0 0 ${Math.random() * 5 + 5}px rgba(99, 102, 241, 0.5)`;
+    
+    // Animate with wind effect
+    particle.animate([
+        { transform: `translate(0, 0) rotate(0deg)`, opacity: 0.8 },
+        { transform: `translate(${windStrength}vw, 100vh) rotate(${windStrength * 2}deg)`, opacity: 0 }
+    ], {
+        duration: duration,
+        easing: 'cubic-bezier(0.2, 0.8, 0.3, 1)',
+        iterations: Infinity
+    });
+    
+    document.body.appendChild(particle);
+}
+
+// ===== LIGHTBOX GALLERY =====
+let currentImageIndex = 0;
+let portfolioImages = [];
+
+function initLightbox() {
+    // Get all portfolio images
+    portfolioImages = Array.from(document.querySelectorAll('.portfolio-item img'));
+    
+    // Add click event to each image
+    portfolioImages.forEach((img, index) => {
+        img.style.cursor = 'pointer';
+        img.addEventListener('click', () => openLightbox(index));
+    });
+    
+    // Lightbox event listeners
+    document.getElementById('lightboxClose').addEventListener('click', closeLightbox);
+    document.getElementById('lightboxPrev').addEventListener('click', showPrevImage);
+    document.getElementById('lightboxNext').addEventListener('click', showNextImage);
+    document.getElementById('lightbox').addEventListener('click', (e) => {
+        if (e.target.id === 'lightbox') closeLightbox();
+    });
+    
+    // Keyboard navigation
+    document.addEventListener('keydown', (e) => {
+        if (document.getElementById('lightbox').classList.contains('active')) {
+            if (e.key === 'Escape') closeLightbox();
+            if (e.key === 'ArrowLeft') showPrevImage();
+            if (e.key === 'ArrowRight') showNextImage();
+        }
+    });
+}
+
+function openLightbox(index) {
+    currentImageIndex = index;
+    const lightbox = document.getElementById('lightbox');
+    const lightboxImg = document.getElementById('lightboxImg');
+    
+    lightboxImg.src = portfolioImages[currentImageIndex].src;
+    lightboxImg.alt = portfolioImages[currentImageIndex].alt;
+    lightbox.classList.add('active');
+    document.body.style.overflow = 'hidden';
+}
+
+function closeLightbox() {
+    const lightbox = document.getElementById('lightbox');
+    lightbox.classList.remove('active');
+    document.body.style.overflow = 'auto';
+}
+
+function showPrevImage() {
+    currentImageIndex = (currentImageIndex - 1 + portfolioImages.length) % portfolioImages.length;
+    document.getElementById('lightboxImg').src = portfolioImages[currentImageIndex].src;
+}
+
+function showNextImage() {
+    currentImageIndex = (currentImageIndex + 1) % portfolioImages.length;
+    document.getElementById('lightboxImg').src = portfolioImages[currentImageIndex].src;
+}
+
+// ===== INITIALIZE EFFECTS =====
+document.addEventListener('DOMContentLoaded', function() {
+    setTimeout(function() {
+        const loadingScreen = document.getElementById('loadingScreen');
+        loadingScreen.style.opacity = '0';
+        setTimeout(function() {
+            loadingScreen.style.display = 'none';
+            document.querySelectorAll('.section').forEach(function(section, index) {
+                setTimeout(function() {
+                    section.classList.add('visible');
+                }, 100 * index);
+            });
+            
+            // Start effects after page loads
+            createParticles();
+            type();
+            initLightbox();
+        }, 500);
+    }, 1500);
+});
+
+// ===== EXISTING PORTFOLIO SCRIPTS =====
+document.addEventListener('DOMContentLoaded', function() {
+    const mobileMenuButton = document.getElementById('mobileMenuButton');
+    const mobileMenu = document.getElementById('mobileMenu');
+    mobileMenuButton.addEventListener('click', function() {
+        mobileMenu.classList.toggle('hidden');
+    });
+    
+    const navLinks = document.querySelectorAll('nav a, .mobile-menu a');
+    navLinks.forEach(function(link) {
+        link.addEventListener('click', function() {
+            navLinks.forEach(function(navLink) {
+                navLink.classList.remove('active');
+            });
+            this.classList.add('active');
+            mobileMenu.classList.add('hidden');
+        });
+    });
+    
+    const sections = document.querySelectorAll('section');
+    window.addEventListener('scroll', function() {
+        let current = '';
+        sections.forEach(function(section) {
+            const sectionTop = section.offsetTop;
+            const sectionHeight = section.clientHeight;
+            if (pageYOffset >= (sectionTop - sectionHeight / 3)) {
+                current = section.getAttribute('id');
+            }
+        });
+        navLinks.forEach(function(link) {
+            link.classList.remove('active');
+            if (link.getAttribute('href') === '#' + current) {
+                link.classList.add('active');
+            }
+        });
+    });
+    
+    const backToTop = document.getElementById('backToTop');
+    window.addEventListener('scroll', function() {
+        if (window.pageYOffset > 300) {
+            backToTop.classList.add('visible');
+        } else {
+            backToTop.classList.remove('visible');
+        }
+    });
+    
+    backToTop.addEventListener('click', function() {
+        window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+        });
+    });
+    
+    document.querySelectorAll('a[href^="#"]').forEach(function(anchor) {
+        anchor.addEventListener('click', function(e) {
+            e.preventDefault();
+            const targetId = this.getAttribute('href');
+            const targetElement = document.querySelector(targetId);
+            window.scrollTo({
+                top: targetElement.offsetTop - 80,
+                behavior: 'smooth'
+            });
+        });
+    });
+    
+    const header = document.querySelector('header');
+    window.addEventListener('scroll', function() {
+        if (window.pageYOffset > 50) {
+            header.classList.add('shadow-md');
+            header.classList.remove('shadow-sm');
+        } else {
+            header.classList.remove('shadow-md');
+            header.classList.add('shadow-sm');
+        }
+    });
+    
+    // Recreate particles on resize
+    window.addEventListener('resize', function() {
+        document.querySelectorAll('.particle').forEach(particle => {
+            particle.remove();
+        });
+        createParticles();
+    });
+});
+</script>
+<script defer src="/_vercel/insights/script.js"></script>
+</body>
+</html>
