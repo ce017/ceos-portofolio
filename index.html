@@ -205,14 +205,18 @@ html.dark #darkToggle .toggle-knob {
   box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1), 0 4px 6px -2px rgba(0,0,0,0.05);
 }
 .back-to-top {
-  position: fixed;
-  bottom: 24px;
-  right: 20px;
+  position: fixed !important;
+  bottom: 24px !important;
+  right: 20px !important;
+  top: auto !important;
+  left: auto !important;
   z-index: 9998;
   opacity: 0;
   visibility: hidden;
   pointer-events: none;
   transition: opacity 0.3s ease, visibility 0.3s ease;
+  transform: none !important;
+  will-change: auto;
 }
 .back-to-top.visible {
   opacity: 1;
@@ -358,13 +362,10 @@ a, button { touch-action: manipulation; }
   #contact .w-10.h-10 { width: 44px; height: 44px; }
   #contact span.font-medium { font-size: 1rem; }
 
-  /* CTA buttons at bottom of sections */
-  .flex.justify-center.mt-12 { margin-top: 14px !important; }
-  .flex.justify-center.mt-8 { margin-top: 10px !important; }
-  .flex.justify-center a { font-size: 0.72rem !important; padding: 6px 14px !important; border-radius: 6px !important; box-shadow: none !important; opacity: 0.75; width: auto !important; letter-spacing: 0.02em; }
+  /* CTA buttons - handled in dedicated block below */
 
   /* Back to top: bigger, easier to tap */
-  .back-to-top { width: 48px; height: 48px; bottom: 16px; right: 16px; }
+  .back-to-top { width: 48px !important; height: 48px !important; bottom: 20px !important; right: 16px !important; top: auto !important; transform: none !important; }
 
   /* Lightbox nav buttons: bigger on mobile */
   .lightbox-prev { left: 8px; }
@@ -526,6 +527,46 @@ a, button { touch-action: manipulation; }
   .section.py-20 { padding-top: 28px !important; padding-bottom: 28px !important; }
   .container.mx-auto.px-4 { padding-left: 12px !important; padding-right: 12px !important; }
 }
+
+/* ===== SECTION NAV BUTTONS — mobile pill style ===== */
+@media (max-width: 768px) {
+  .section-nav-btn-wrap {
+    display: flex;
+    justify-content: center;
+    margin-top: 16px !important;
+    margin-bottom: 4px;
+  }
+  /* Override ALL the section bottom buttons */
+  .flex.justify-center.mt-12,
+  .flex.justify-center.mt-8 {
+    margin-top: 16px !important;
+  }
+  .flex.justify-center.mt-12 > a,
+  .flex.justify-center.mt-8 > a,
+  .flex.justify-center > a.px-6 {
+    all: unset !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    gap: 5px !important;
+    font-family: inherit !important;
+    font-size: 0.7rem !important;
+    font-weight: 500 !important;
+    color: var(--text-secondary) !important;
+    border: 1px solid var(--border-color) !important;
+    border-radius: 999px !important;
+    padding: 6px 14px !important;
+    background: transparent !important;
+    cursor: pointer !important;
+    letter-spacing: 0.03em !important;
+    transition: color 0.2s, border-color 0.2s !important;
+  }
+  .flex.justify-center.mt-12 > a:active,
+  .flex.justify-center.mt-8 > a:active,
+  .flex.justify-center > a.px-6:active {
+    color: #6366f1 !important;
+    border-color: #6366f1 !important;
+  }
+}
 </style>
 </head>
 <body>
@@ -568,7 +609,7 @@ a, button { touch-action: manipulation; }
     </div>
   </div>
 </header>
-<main class="pt-20">
+<main class="pt-20" style="isolation: isolate;">
 <section id="home" class="section min-h-screen flex items-center justify-center relative" style="padding-top: env(safe-area-inset-top);">
   <div class="container mx-auto px-4 text-center z-10">
     <h1 class="text-5xl md:text-6xl font-bold mb-6">Hi, I'm Ceo.</h1>
@@ -955,8 +996,8 @@ a, button { touch-action: manipulation; }
 </footer>
 <div style="height: env(safe-area-inset-bottom); background: var(--bg-secondary);"></div>
 
-<button class="back-to-top w-12 h-12 bg-primary text-white rounded-full shadow-lg flex items-center justify-center" id="backToTop">
-<i class="ri-arrow-up-line ri-lg"></i>
+<button class="back-to-top" id="backToTop" style="width:40px;height:40px;background:#6366f1;border:none;border-radius:50%;display:flex;align-items:center;justify-content:center;color:#fff;box-shadow:0 2px 12px rgba(99,102,241,0.45);cursor:pointer;">
+<i class="ri-arrow-up-line" style="font-size:18px;"></i>
 </button>
 
 <div class="lightbox" id="lightbox">
