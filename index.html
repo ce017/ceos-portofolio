@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <meta name="google-site-verification" content="x-Cz4UN5D0vcl6c3t4sRsx_74mVvH5OHkIP5-LlmY9Q" />
 <title>Ceo's Portfolio</title>
 <script src="https://cdn.tailwindcss.com/3.4.16"></script>
@@ -131,7 +131,7 @@ html.dark #darkToggle .toggle-knob {
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: #f5f5f5;
+  background-color: var(--bg-primary);
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -272,6 +272,147 @@ html.dark #darkToggle .toggle-knob {
 @media (max-width: 768px) {
   .typing-container { font-size: 1.4rem; height: 50px; }
 }
+
+/* ===== MOBILE OPTIMIZATIONS ===== */
+
+/* Smoother tap highlights */
+* { -webkit-tap-highlight-color: transparent; }
+a, button { touch-action: manipulation; }
+
+/* Better base font sizing on mobile */
+@media (max-width: 640px) {
+  html { font-size: 15px; }
+
+  /* Header: tighter padding, keep toggle + burger visible */
+  header .container { padding-top: 12px; padding-bottom: 12px; }
+
+  /* Hero section: less cramped */
+  #home h1 { font-size: 2.4rem; line-height: 1.2; }
+  .typing-container { font-size: 1.2rem; height: 44px; margin: 1rem 0; }
+
+  /* Hero CTA buttons: full width stack on tiny screens */
+  #home .flex.flex-wrap { flex-direction: column; align-items: center; gap: 10px; }
+  #home .flex.flex-wrap a {
+    width: 80%;
+    text-align: center;
+    padding: 14px 20px;
+    font-size: 0.95rem;
+    border-radius: 10px;
+  }
+
+  /* Section headings */
+  h2.text-3xl { font-size: 1.6rem; margin-bottom: 1.5rem; }
+  h3.text-2xl { font-size: 1.3rem; }
+  h3.text-xl  { font-size: 1.1rem; }
+  h4.text-xl  { font-size: 1rem; }
+  h4.text-lg  { font-size: 0.95rem; }
+
+  /* Experience cards: better padding & readability */
+  .experience-card { padding: 16px; border-radius: 12px; }
+  .experience-card h3 { font-size: 1rem; padding-bottom: 10px; margin-bottom: 12px; }
+  .experience-item { font-size: 0.88rem; line-height: 1.55; padding-left: 16px; margin-bottom: 6px; }
+  .experience-item:before { width: 5px; height: 5px; }
+
+  /* Section padding */
+  .section.py-20 { padding-top: 3rem; padding-bottom: 3rem; }
+  .container.mx-auto { padding-left: 16px; padding-right: 16px; }
+  .max-w-4xl, .max-w-2xl { padding-left: 0; padding-right: 0; }
+
+  /* Portfolio grid: 2 cols on mobile instead of 1 */
+  .grid.grid-cols-1.md\:grid-cols-2.lg\:grid-cols-3 {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 8px;
+  }
+  .portfolio-item img { height: 110px; }
+
+  /* Portfolio section title + link */
+  #portfolio h4.text-xl { font-size: 1rem; margin-bottom: 10px; }
+  #portfolio a.inline-block { font-size: 0.85rem; padding: 8px 14px; margin-bottom: 14px; }
+
+  /* Awards: single column, tighter spacing */
+  .grid.grid-cols-1.md\:grid-cols-2.gap-4 { grid-template-columns: 1fr; gap: 6px; }
+  .flex.items-center.space-x-2 { font-size: 0.88rem; gap: 8px; }
+  .flex.items-center.space-x-2 i { font-size: 14px; flex-shrink: 0; }
+
+  /* Awards card padding */
+  #awards .bg-white.p-8 { padding: 16px; }
+  #awards h3.text-xl { font-size: 1rem; margin-bottom: 10px; }
+  #awards h4.text-lg { font-size: 0.9rem; margin-bottom: 8px; margin-top: 16px; }
+
+  /* Skills bars */
+  #skills .bg-white.p-8 { padding: 16px; }
+  #skills p.text-lg { font-size: 0.9rem; line-height: 1.6; }
+  #skills .grid { gap: 10px; }
+  #skills .bg-gray-50.p-4 { padding: 12px; }
+  #skills h3.text-lg { font-size: 0.9rem; margin-bottom: 8px; }
+
+  /* Contact cards: bigger tap targets */
+  #contact .max-w-lg { padding: 0; }
+  #contact .bg-white.p-8 { padding: 16px; }
+  #contact a.flex { padding: 16px; border-radius: 12px; }
+  #contact .w-10.h-10 { width: 44px; height: 44px; }
+  #contact span.font-medium { font-size: 1rem; }
+
+  /* CTA buttons at bottom of sections */
+  .flex.justify-center.mt-12 { margin-top: 2rem; }
+  .flex.justify-center a.px-6 { padding: 13px 28px; font-size: 0.9rem; width: 80%; text-align: center; }
+
+  /* Back to top: bigger, easier to tap */
+  .back-to-top { width: 48px; height: 48px; bottom: 16px; right: 16px; }
+
+  /* Lightbox nav buttons: bigger on mobile */
+  .lightbox-prev { left: 8px; }
+  .lightbox-next { right: 8px; }
+  .lightbox-nav { width: 42px; height: 42px; font-size: 1.4rem; }
+  .lightbox-close { font-size: 1.6rem; top: -36px; }
+
+  /* Mobile menu: bigger tap targets */
+  .mobile-menu a.py-2 { padding: 12px 4px; font-size: 1rem; border-bottom: 1px solid var(--border-color); }
+  .mobile-menu a.py-2:last-child { border-bottom: none; }
+
+  /* Toggle: keep it compact */
+  .dark-toggle-wrap .toggle-icon { font-size: 12px; }
+  #darkToggle { width: 44px; height: 24px; }
+  #darkToggle .toggle-knob { width: 18px; height: 18px; font-size: 11px; }
+  html.dark #darkToggle .toggle-knob { transform: translateX(20px); }
+
+  /* Roblox group/discord links in experience */
+  .mb-4.space-y-2 a { font-size: 0.85rem; }
+
+  /* Space-y adjustments */
+  .space-y-10 > * + * { margin-top: 1.25rem; }
+  .space-y-6 > * + * { margin-top: 1rem; }
+  .space-y-2 > * + * { margin-top: 0.35rem; }
+
+  /* h2 section title spacing */
+  h2.text-3xl.font-bold.text-center.mb-12 { margin-bottom: 1.5rem; }
+
+  /* View all portfolio button */
+  #portfolio a.inline-block.px-6 { display: block; margin: 0 auto 14px; width: fit-content; }
+
+  /* Framework note text */
+  #portfolio p.text-sm.italic { font-size: 0.78rem; }
+}
+
+/* Medium mobile (640-768px): 2-col portfolio grid, better spacing */
+@media (min-width: 640px) and (max-width: 768px) {
+  #home h1 { font-size: 3rem; }
+  .typing-container { font-size: 1.5rem; }
+  .experience-card { padding: 20px; }
+  .portfolio-item img { height: 130px; }
+  .grid.grid-cols-1.md\:grid-cols-2.lg\:grid-cols-3 {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* Active state for touch (replaces hover on mobile) */
+@media (hover: none) {
+  .experience-card:hover { transform: none; box-shadow: none; }
+  .experience-card:active { transform: translateY(-2px); box-shadow: 0 4px 12px rgba(0,0,0,0.12); }
+  .nav-button:hover:after { width: 0; }
+  a:active { opacity: 0.75; }
+  #contact a.flex:active { background-color: var(--bg-tertiary); }
+}
 </style>
 </head>
 <body>
@@ -303,7 +444,7 @@ html.dark #darkToggle .toggle-knob {
       </button>
     </div>
   </div>
-  <div class="mobile-menu hidden w-full bg-white shadow-md absolute top-full left-0 py-4 px-4 md:hidden" id="mobileMenu">
+  <div class="mobile-menu hidden w-full bg-white shadow-md absolute top-full left-0 py-2 px-4 md:hidden" id="mobileMenu">
     <div class="flex flex-col space-y-4">
       <a href="#home" class="nav-button text-gray-700 hover:text-primary py-2">Home</a>
       <a href="#experience" class="nav-button text-gray-700 hover:text-primary py-2">Experience</a>
@@ -315,7 +456,7 @@ html.dark #darkToggle .toggle-knob {
   </div>
 </header>
 <main class="pt-20">
-<section id="home" class="section min-h-screen flex items-center justify-center relative">
+<section id="home" class="section min-h-screen flex items-center justify-center relative" style="padding-top: env(safe-area-inset-top);">
   <div class="container mx-auto px-4 text-center z-10">
     <h1 class="text-5xl md:text-6xl font-bold mb-6">Hi, I'm Ceo.</h1>
     <div class="typing-container">
@@ -693,6 +834,7 @@ html.dark #darkToggle .toggle-knob {
 <p class="text-gray-500 text-sm mt-2">Last updated: June 22, 2025</p>
 </div>
 </footer>
+<div style="height: env(safe-area-inset-bottom); background: var(--bg-secondary);"></div>
 
 <button class="back-to-top w-12 h-12 bg-primary text-white rounded-full shadow-lg flex items-center justify-center" id="backToTop">
 <i class="ri-arrow-up-line ri-lg"></i>
