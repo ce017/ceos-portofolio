@@ -414,135 +414,133 @@ a, button { touch-action: manipulation; }
   #contact a.flex:active { background-color: var(--bg-tertiary); }
 }
 
-/* ===== ACCORDION (mobile only) ===== */
+/* Section min-height: remove 100vh forcing on mobile */
 @media (max-width: 768px) {
-
-  /* Experience cards become accordion triggers */
-  .accordion-card { cursor: pointer; }
-  .accordion-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    cursor: pointer;
-    user-select: none;
-    padding-bottom: 10px;
-    border-bottom: 1px solid var(--border-color);
-    margin-bottom: 0;
-  }
-  .accordion-header h3 {
-    border-bottom: none;
-    padding-bottom: 0;
-    margin-bottom: 0;
-    font-size: 0.95rem;
-    flex: 1;
-    padding-right: 8px;
-  }
-  .accordion-arrow {
-    width: 28px; height: 28px;
-    border-radius: 50%;
-    background: var(--bg-tertiary);
-    display: flex; align-items: center; justify-content: center;
-    flex-shrink: 0;
-    transition: transform 0.3s ease, background 0.2s;
-    font-style: normal;
-    font-size: 11px;
-    color: var(--text-secondary);
-  }
-  .accordion-card.open .accordion-arrow { transform: rotate(180deg); background: #6366f1; color: #fff; }
-  .accordion-body {
-    max-height: 0;
-    overflow: hidden;
-    transition: max-height 0.4s cubic-bezier(0.4,0,0.2,1), padding 0.3s ease;
-    padding-top: 0;
-  }
-  .accordion-card.open .accordion-body {
-    max-height: 2000px;
-    padding-top: 14px;
-  }
-
-  /* Swipe carousel for portfolio images */
-  .swipe-carousel {
-    display: flex;
-    overflow-x: auto;
-    scroll-snap-type: x mandatory;
-    -webkit-overflow-scrolling: touch;
-    gap: 10px;
-    padding-bottom: 10px;
-    scrollbar-width: none;
-    margin-bottom: 6px;
-  }
-  .swipe-carousel::-webkit-scrollbar { display: none; }
-  .swipe-carousel .portfolio-item {
-    flex: 0 0 72vw;
-    max-width: 280px;
-    scroll-snap-align: start;
-    border-radius: 12px;
-  }
-  .swipe-carousel .portfolio-item img { height: 160px; }
-  .carousel-hint {
-    display: block;
-    text-align: center;
-    font-size: 0.72rem;
-    color: var(--text-muted);
-    margin-bottom: 12px;
-    letter-spacing: 0.02em;
-  }
-  /* Hide the grid class on mobile for carousels, use flex instead */
-  .mobile-carousel-wrap .grid {
-    display: flex !important;
-    flex-wrap: nowrap !important;
-    overflow-x: auto;
-    scroll-snap-type: x mandatory;
-    -webkit-overflow-scrolling: touch;
-    gap: 10px;
-    padding-bottom: 10px;
-    scrollbar-width: none;
-    margin-bottom: 6px;
-  }
-  .mobile-carousel-wrap .grid::-webkit-scrollbar { display: none; }
-  .mobile-carousel-wrap .portfolio-item {
-    flex: 0 0 72vw !important;
-    max-width: 280px;
-    scroll-snap-align: start;
-    width: auto !important;
-  }
-  .mobile-carousel-wrap .portfolio-item img { height: 155px; }
-
-  /* Awards accordion-style collapsible groups */
-  .award-group-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    cursor: pointer;
-    padding: 10px 0;
-    border-bottom: 1px solid var(--border-color);
-    user-select: none;
-  }
-  .award-group-header h4 {
-    margin-bottom: 0 !important;
-    margin-top: 0 !important;
-    font-size: 0.9rem;
-  }
-  .award-group-header .award-arrow {
-    font-size: 10px;
-    color: var(--text-muted);
-    transition: transform 0.25s;
-  }
-  .award-group.open .award-arrow { transform: rotate(180deg); }
-  .award-group-body {
-    max-height: 0;
-    overflow: hidden;
-    transition: max-height 0.35s ease;
-  }
-  .award-group.open .award-group-body {
-    max-height: 600px;
-    padding-top: 8px;
-    padding-bottom: 4px;
-  }
-
-  /* Section min-height: remove 100vh forcing on mobile */
   .section { min-height: unset; }
   #home { min-height: 100svh; }
+}
+
+/* ===== MOBILE DENSITY TIGHTENING ===== */
+@media (max-width: 768px) {
+
+  /* --- Experience cards: much tighter --- */
+  .experience-card {
+    padding: 12px 14px !important;
+    border-radius: 10px;
+    margin-bottom: 10px;
+  }
+  .experience-card h3.text-xl {
+    font-size: 0.88rem !important;
+    font-weight: 700;
+    padding-bottom: 7px;
+    margin-bottom: 8px;
+    letter-spacing: 0.01em;
+  }
+  .experience-card h4.text-lg {
+    font-size: 0.8rem !important;
+    font-weight: 600;
+    margin-bottom: 4px !important;
+    margin-top: 10px !important;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    opacity: 0.85;
+  }
+  .experience-item {
+    font-size: 0.8rem !important;
+    line-height: 1.45 !important;
+    padding-left: 13px !important;
+    margin-bottom: 3px !important;
+  }
+  .experience-item:before {
+    width: 4px !important;
+    height: 4px !important;
+  }
+  .space-y-6 > * + * { margin-top: 6px !important; }
+  .space-y-2 > * + * { margin-top: 3px !important; }
+  .space-y-10 > * + * { margin-top: 10px !important; }
+
+  /* Roblox/Discord links in cards */
+  .mb-4.space-y-2 { margin-bottom: 8px !important; }
+  .mb-4.space-y-2 .flex { font-size: 0.75rem; gap: 5px; }
+
+  /* Section headings tighter */
+  #experience h2.text-3xl { font-size: 1.4rem; margin-bottom: 10px; }
+  #experience h2.text-3xl.mb-12 { margin-bottom: 10px !important; }
+  .max-w-4xl.mx-auto { padding: 0 !important; }
+
+  /* "View My Work Portfolio" button spacing */
+  .flex.justify-center.mt-8 { margin-top: 12px !important; }
+  .flex.justify-center.mt-12 { margin-top: 14px !important; }
+
+  /* --- Portfolio: tight 2-col grid --- */
+  .grid.grid-cols-1.md\:grid-cols-2.lg\:grid-cols-3 {
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 6px !important;
+    margin-bottom: 0 !important;
+  }
+  .portfolio-item {
+    border-radius: 8px !important;
+  }
+  .portfolio-item img {
+    height: 100px !important;
+  }
+  #portfolio h3.text-2xl { font-size: 1.2rem; margin-bottom: 10px !important; }
+  #portfolio h4.text-xl { font-size: 0.95rem; margin-bottom: 8px !important; }
+  #portfolio .text-center.mb-12 { margin-bottom: 14px !important; }
+  #portfolio .max-w-6xl.mx-auto.mb-16 { margin-bottom: 20px !important; }
+  #portfolio a.inline-block { font-size: 0.8rem; padding: 7px 12px; margin-bottom: 10px; }
+  #portfolio p.text-sm.italic { font-size: 0.75rem; margin-bottom: 10px !important; }
+
+  /* --- Awards: tighter --- */
+  #awards .bg-white.p-8 { padding: 12px 14px !important; }
+  #awards h3.text-xl { font-size: 0.9rem !important; margin-bottom: 8px !important; }
+  #awards h4.text-lg { font-size: 0.8rem !important; margin-bottom: 5px !important; margin-top: 12px !important; }
+  #awards .flex.items-center.space-x-2 { font-size: 0.8rem; gap: 6px; margin-bottom: 2px; }
+  #awards .mb-8 { margin-bottom: 10px !important; }
+  #awards .mt-12 { margin-top: 14px !important; }
+  .grid.grid-cols-1.md\:grid-cols-2.gap-4 {
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 4px 12px !important;
+  }
+
+  /* --- Skills: tighter --- */
+  #skills .bg-white.p-8 { padding: 14px !important; }
+  #skills p.text-lg { font-size: 0.85rem !important; line-height: 1.55; }
+  #skills .grid { gap: 8px !important; }
+  #skills .bg-gray-50.p-4 { padding: 9px 12px !important; }
+  #skills h3.text-lg { font-size: 0.85rem !important; margin-bottom: 6px !important; }
+  #skills h2.text-3xl { font-size: 1.4rem; margin-bottom: 12px !important; }
+
+  /* --- Contact tighter --- */
+  #contact h2.text-3xl { font-size: 1.4rem; margin-bottom: 12px !important; }
+  #contact .bg-white.p-8 { padding: 14px !important; }
+  #contact a.flex { padding: 13px !important; border-radius: 10px !important; }
+
+  /* --- General section padding --- */
+  .section.py-20 { padding-top: 28px !important; padding-bottom: 28px !important; }
+  .container.mx-auto.px-4 { padding-left: 12px !important; padding-right: 12px !important; }
+}
+
+/* ===== MOBILE: toned-down section CTA buttons ===== */
+@media (max-width: 768px) {
+  .flex.justify-center.mt-12,
+  .flex.justify-center.mt-8 {
+    margin-top: 14px !important;
+  }
+  .flex.justify-center.mt-12 > a,
+  .flex.justify-center.mt-8 > a {
+    font-size: 0.75rem !important;
+    padding: 7px 16px !important;
+    border-radius: 6px !important;
+    box-shadow: none !important;
+    opacity: 0.8;
+    letter-spacing: 0.02em;
+    width: auto !important;
+  }
+  .flex.justify-center.mt-12 > a:active,
+  .flex.justify-center.mt-8 > a:active {
+    opacity: 1;
+  }
 }
 </style>
 </head>
@@ -607,13 +605,9 @@ a, button { touch-action: manipulation; }
 <div class="container mx-auto px-4">
 <h2 class="text-3xl font-bold text-center mb-12">Experience</h2>
 <div class="max-w-4xl mx-auto space-y-10">
-<div class="experience-card accordion-card bg-white p-6 rounded-lg shadow-md">
+<div class="experience-card bg-white p-6 rounded-lg shadow-md">
 
-<div class="accordion-header">
-<h3 class="text-xl font-bold text-gray-800">Professional Experience</h3>
-<span class="accordion-arrow">▼</span>
-</div>
-<div class="accordion-body">
+<h3 class="text-xl font-bold text-gray-800 border-b border-gray-200 pb-3 mb-4">Professional Experience</h3>
 
 <div class="space-y-6">
 <div>
@@ -638,9 +632,6 @@ a, button { touch-action: manipulation; }
 <li class="experience-item"><i>More can be found in my roblox experience page</i></li>
 </ul>
 </div>
-
-</div>
-</div>
 </div>
 <div class="flex justify-center mt-8">
   <a href="#portfolio" class="px-6 py-3 bg-secondary text-white rounded-button shadow-md hover:bg-opacity-90 transition-all duration-300 whitespace-nowrap flex items-center">
@@ -648,13 +639,9 @@ a, button { touch-action: manipulation; }
   </a>
 </div>
 <h2 class="text-3xl font-bold text-center mb-12">Roblox Experience</h2>
-<div class="experience-card accordion-card bg-white p-6 rounded-lg shadow-md">
+<div class="experience-card bg-white p-6 rounded-lg shadow-md">
 
-<div class="accordion-header">
-<h3 class="text-xl font-bold text-gray-800">Zanance's USAR</h3>
-<span class="accordion-arrow">▼</span>
-</div>
-<div class="accordion-body">
+<h3 class="text-xl font-bold text-gray-800 border-b border-gray-200 pb-3 mb-4">Zanance's USAR</h3>
 
 <div class="mb-4 space-y-2">
   <div class="flex items-center space-x-2 text-sm text-gray-600"><i class="ri-link"></i><a href="https://www.roblox.com/communities/3108077/United-States-Army#!/about" target="_blank" class="hover:text-primary transition-colors">Roblox Group</a></div>
@@ -669,16 +656,10 @@ a, button { touch-action: manipulation; }
 <div><h4 class="text-lg font-semibold text-primary mb-3">75th (ASOC)</h4><ul class="space-y-2"><li class="experience-item">Platoon Sergeant</li></ul></div>
 <div><h4 class="text-lg font-semibold text-primary mb-3">1ID (FORSCOM)</h4><ul class="space-y-2"><li class="experience-item">Head Instructor</li><li class="experience-item">Platoon Sergeant</li></ul></div>
 </div>
+</div>
+<div class="experience-card bg-white p-6 rounded-lg shadow-md">
 
-</div>
-</div>
-<div class="experience-card accordion-card bg-white p-6 rounded-lg shadow-md">
-
-<div class="accordion-header">
-<h3 class="text-xl font-bold text-gray-800">bbbvvvvvvi's USAF (previous duv's, tbrown's, Zer0's and Swift's)</h3>
-<span class="accordion-arrow">▼</span>
-</div>
-<div class="accordion-body">
+<h3 class="text-xl font-bold text-gray-800 border-b border-gray-200 pb-3 mb-4">bbbvvvvvvi's USAF (previous duv's, tbrown's, Zer0's and Swift's)</h3>
 
 <div class="mb-4 space-y-2">
   <div class="flex items-center space-x-2 text-sm text-gray-600"><i class="ri-link"></i><a href="https://www.roblox.com/communities/33334312/United-Stat-s-ir-Forc" target="_blank" class="hover:text-primary transition-colors">Roblox Group</a></div>
@@ -693,50 +674,35 @@ a, button { touch-action: manipulation; }
 <div><h4 class="text-lg font-semibold text-primary mb-3">Community Staff</h4><ul class="space-y-2"><li class="experience-item">Moderator</li></ul></div>
 <div><h4 class="text-lg font-semibold text-primary mb-3">Development Team</h4><ul class="space-y-2"><li class="experience-item">Head Developer</li><li class="experience-item">Project Manager</li><li class="experience-item">Senior Developer</li><li class="experience-item">Developer</li></ul></div>
 </div>
+</div>
+<div class="experience-card bg-white p-6 rounded-lg shadow-md">
 
-</div>
-</div>
-<div class="experience-card accordion-card bg-white p-6 rounded-lg shadow-md">
-
-<div class="accordion-header">
-<h3 class="text-xl font-bold text-gray-800">Liam Born's US Armed Forces</h3>
-<span class="accordion-arrow">▼</span>
-</div>
-<div class="accordion-body">
+<h3 class="text-xl font-bold text-gray-800 border-b border-gray-200 pb-3 mb-4">Liam Born's US Armed Forces</h3>
 
 <div class="mb-4 space-y-2">
   <div class="flex items-center space-x-2 text-sm text-gray-600"><i class="ri-link"></i><a href="https://www.roblox.com/communities/35415775/The-United-States-ilitary-2000s#!/about" target="_blank" class="hover:text-primary transition-colors">Roblox Group</a></div>
   <div class="flex items-center space-x-2 text-sm text-gray-600"><i class="ri-discord-fill"></i><a href="https://discord.gg/RWJPbP3p5r" target="_blank" class="hover:text-primary transition-colors">Discord Server</a></div>
 </div>
-<div class="space-y-6"><div><ul class="space-y-2"><li class="experience-item">Provost Marshal General (of both the navy and army)</li><li class="experience-item">Builder and developer</li></ul></div></div>
+<div class="space-y-6"><div><ul class="space-y-2"><li class="experience-item">Provost Marshal General (of both the navy and army)</li><li class="experience-item">Builder and developer</li></ul></div>
 
 </div>
 </div>
-<div class="experience-card accordion-card bg-white p-6 rounded-lg shadow-md">
+<div class="experience-card bg-white p-6 rounded-lg shadow-md">
 
-<div class="accordion-header">
-<h3 class="text-xl font-bold text-gray-800">FuFu's German Army</h3>
-<span class="accordion-arrow">▼</span>
-</div>
-<div class="accordion-body">
+<h3 class="text-xl font-bold text-gray-800 border-b border-gray-200 pb-3 mb-4">FuFu's German Army</h3>
 
-<div class="space-y-6"><div><h4 class="text-lg font-semibold text-primary mb-3">Special Forces Command</h4><ul class="space-y-2"><li class="experience-item">Deputy Commanding General</li><li class="experience-item">Commanding General</li><li class="experience-item">Upper-Army Staff</li><li class="experience-item">Inspector of the Army (second in command)</li></ul></div></div>
+<div class="space-y-6"><div><h4 class="text-lg font-semibold text-primary mb-3">Special Forces Command</h4><ul class="space-y-2"><li class="experience-item">Deputy Commanding General</li><li class="experience-item">Commanding General</li><li class="experience-item">Upper-Army Staff</li><li class="experience-item">Inspector of the Army (second in command)</li></ul></div>
 
 </div>
 </div>
-<div class="experience-card accordion-card bg-white p-6 rounded-lg shadow-md">
+<div class="experience-card bg-white p-6 rounded-lg shadow-md">
 
-<div class="accordion-header">
-<h3 class="text-xl font-bold text-gray-800">Various Hood Games</h3>
-<span class="accordion-arrow">▼</span>
-</div>
-<div class="accordion-body">
+<h3 class="text-xl font-bold text-gray-800 border-b border-gray-200 pb-3 mb-4">Various Hood Games</h3>
 
 <div class="space-y-6"><p class="text-gray-600 italic mb-4">These games had 1.5k active players at the time</p><ul class="space-y-2"><li class="experience-item">Staff Manager</li><li class="experience-item">Moderator</li><li class="experience-item">Head Moderator</li><li class="experience-item">Head of In-Game Moderation</li><li class="experience-item">Event Host</li><li class="experience-item">Admin</li><li class="experience-item">Head Admin</li><li class="experience-item">Administrator</li></ul></div>
 
 </div>
 </div></div>
-</div>
 <div class="flex justify-center mt-12">
 <a href="#awards" class="px-6 py-3 bg-primary text-white rounded-button shadow-md hover:bg-opacity-90 transition-all duration-300 whitespace-nowrap">View My Awards</a>
 </div>
@@ -751,8 +717,7 @@ a, button { touch-action: manipulation; }
       <div class="text-center mb-12">
         <h4 class="text-xl font-semibold mb-4">Hickam Air Force Base</h4>
         <a href="https://www.roblox.com/games/15701457046/V3-Hickam-Air-Force-Base" target="_blank" class="inline-block px-6 py-2 bg-primary text-white rounded-button hover:bg-opacity-90 transition-all duration-300 mb-8">Visit Hickam Air Force Base on Roblox</a>
-        <span class="carousel-hint">← swipe to browse →</span>
-<div class="mobile-carousel-wrap"><div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
           <div class="portfolio-item bg-gray-50 rounded-lg overflow-hidden shadow-md hover:shadow-lg transition-all duration-300"><img src="https://i.imgur.com/iqYSLcc.jpeg" alt="Air Force Base Project" class="w-full h-48 object-cover cursor-pointer"></div>
           <div class="portfolio-item bg-gray-50 rounded-lg overflow-hidden shadow-md hover:shadow-lg transition-all duration-300"><img src="https://i.imgur.com/foaOm6h.jpeg" alt="Air Force Base Project" class="w-full h-48 object-cover cursor-pointer"></div>
           <div class="portfolio-item bg-gray-50 rounded-lg overflow-hidden shadow-md hover:shadow-lg transition-all duration-300"><img src="https://i.imgur.com/ZN2ncPW.jpeg" alt="Air Force Base Project" class="w-full h-48 object-cover cursor-pointer"></div>
@@ -769,12 +734,10 @@ a, button { touch-action: manipulation; }
           <div class="portfolio-item bg-gray-50 rounded-lg overflow-hidden shadow-md hover:shadow-lg transition-all duration-300"><img src="https://i.imgur.com/Orzuq3C.jpeg" alt="Air Force Base Project" class="w-full h-48 object-cover cursor-pointer"></div>
           <div class="portfolio-item bg-gray-50 rounded-lg overflow-hidden shadow-md hover:shadow-lg transition-all duration-300"><img src="https://i.imgur.com/VaAA3Mg.jpeg" alt="Air Force Base Project" class="w-full h-48 object-cover cursor-pointer"></div>
         </div></div>
-      </div>
       <div class="text-center mb-12">
         <h4 class="text-xl font-semibold mb-4">Seasonal Updates</h4>
         <p class="text-gray-600 italic mb-6">"Halloween update of 2025"</p>
-        <span class="carousel-hint">← swipe to browse →</span>
-<div class="mobile-carousel-wrap"><div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
           <div class="portfolio-item bg-gray-50 rounded-lg overflow-hidden shadow-md hover:shadow-lg transition-all duration-300"><img src="https://i.imgur.com/ShLkqCH.jpeg" alt="Halloween Update 2025" class="w-full h-48 object-cover cursor-pointer"></div>
           <div class="portfolio-item bg-gray-50 rounded-lg overflow-hidden shadow-md hover:shadow-lg transition-all duration-300"><img src="https://i.imgur.com/BwJAjtu.jpeg" alt="Halloween Update 2025" class="w-full h-48 object-cover cursor-pointer"></div>
           <div class="portfolio-item bg-gray-50 rounded-lg overflow-hidden shadow-md hover:shadow-lg transition-all duration-300"><img src="https://i.imgur.com/IGUtaBp.jpeg" alt="Halloween Update 2025" class="w-full h-48 object-cover cursor-pointer"></div>
@@ -788,14 +751,12 @@ a, button { touch-action: manipulation; }
       </div>
       <div class="text-center">
         <h4 class="text-xl font-semibold mb-4">Framework Setup & Customization</h4>
-        <span class="carousel-hint">← swipe to browse →</span>
-<div class="mobile-carousel-wrap"><div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-4">
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-4">
           <div class="portfolio-item bg-gray-50 rounded-lg overflow-hidden shadow-md hover:shadow-lg transition-all duration-300"><img src="https://i.imgur.com/mz85oUD.jpeg" alt="Framework Setup" class="w-full h-48 object-cover cursor-pointer"></div>
           <div class="portfolio-item bg-gray-50 rounded-lg overflow-hidden shadow-md hover:shadow-lg transition-all duration-300"><img src="https://i.imgur.com/h0emsXv.jpeg" alt="Framework Setup" class="w-full h-48 object-cover cursor-pointer"></div>
           <div class="portfolio-item bg-gray-50 rounded-lg overflow-hidden shadow-md hover:shadow-lg transition-all duration-300"><img src="https://i.imgur.com/SlrqR0O.jpeg" alt="Framework Setup" class="w-full h-48 object-cover cursor-pointer"></div>
           <div class="portfolio-item bg-gray-50 rounded-lg overflow-hidden shadow-md hover:shadow-lg transition-all duration-300"><img src="https://i.imgur.com/ZYzoS0t.jpeg" alt="Framework Setup" class="w-full h-48 object-cover cursor-pointer"></div>
           <div class="portfolio-item bg-gray-50 rounded-lg overflow-hidden shadow-md hover:shadow-lg transition-all duration-300"><img src="https://i.imgur.com/nJD5vUc.jpeg" alt="Framework Setup" class="w-full h-48 object-cover cursor-pointer"></div></div></div>
-        </div>
         <p class="text-gray-500 text-sm italic mb-8"><i class="ri-information-line mr-1"></i>I did not create the framework, that is Kronos' work. I only set it up and customized it for the game, which is still a lot of work.</p>
       </div>
     </div>
@@ -809,8 +770,7 @@ a, button { touch-action: manipulation; }
                    class="inline-block px-6 py-2 bg-primary text-white rounded-button hover:bg-opacity-90 transition-all duration-300 mb-8">
                    Visit Joint Base Williams on Roblox
                 </a>
-                <span class="carousel-hint">← swipe to browse →</span>
-<div class="mobile-carousel-wrap"><div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
                     <div class="portfolio-item bg-gray-50 rounded-lg overflow-hidden shadow-md hover:shadow-lg transition-all duration-300"><img src="https://i.imgur.com/VCqwNx1.png" alt="Joint Base Williams" class="w-full h-48 object-cover cursor-pointer"></div>
                     <div class="portfolio-item bg-gray-50 rounded-lg overflow-hidden shadow-md hover:shadow-lg transition-all duration-300"><img src="https://i.imgur.com/SAO2KRK.png" alt="Joint Base Williams" class="w-full h-48 object-cover cursor-pointer"></div>
                     <div class="portfolio-item bg-gray-50 rounded-lg overflow-hidden shadow-md hover:shadow-lg transition-all duration-300"><img src="https://i.imgur.com/zuSgdEx.png" alt="Joint Base Williams" class="w-full h-48 object-cover cursor-pointer"></div>
@@ -827,7 +787,7 @@ a, button { touch-action: manipulation; }
                     <div class="portfolio-item bg-gray-50 rounded-lg overflow-hidden shadow-md hover:shadow-lg transition-all duration-300"><img src="https://i.imgur.com/XX3O6s3.png" alt="Joint Base Williams" class="w-full h-48 object-cover cursor-pointer"></div>
                     <div class="portfolio-item bg-gray-50 rounded-lg overflow-hidden shadow-md hover:shadow-lg transition-all duration-300"><img src="https://i.imgur.com/RWZpUGL.png" alt="Joint Base Williams" class="w-full h-48 object-cover cursor-pointer"></div>
                     <div class="portfolio-item bg-gray-50 rounded-lg overflow-hidden shadow-md hover:shadow-lg transition-all duration-300"><img src="https://i.imgur.com/ryvN6Yy.png" alt="Joint Base Williams" class="w-full h-48 object-cover cursor-pointer"></div>
-                </div></div>
+                </div>
             </div>
         </div>
 
@@ -840,8 +800,7 @@ a, button { touch-action: manipulation; }
                    class="inline-block px-6 py-2 bg-primary text-white rounded-button hover:bg-opacity-90 transition-all duration-300 mb-8">
                    Visit The Mansion on Roblox
                 </a>
-                <span class="carousel-hint">← swipe to browse →</span>
-<div class="mobile-carousel-wrap"><div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
                     <div class="portfolio-item bg-gray-50 rounded-lg overflow-hidden shadow-md hover:shadow-lg transition-all duration-300"><img src="https://i.imgur.com/VUR400h.png" alt="The Mansion" class="w-full h-48 object-cover cursor-pointer"></div>
                     <div class="portfolio-item bg-gray-50 rounded-lg overflow-hidden shadow-md hover:shadow-lg transition-all duration-300"><img src="https://i.imgur.com/ZgtYzUe.png" alt="The Mansion" class="w-full h-48 object-cover cursor-pointer"></div>
                     <div class="portfolio-item bg-gray-50 rounded-lg overflow-hidden shadow-md hover:shadow-lg transition-all duration-300"><img src="https://i.imgur.com/yagc9EO.png" alt="The Mansion" class="w-full h-48 object-cover cursor-pointer"></div>
@@ -862,7 +821,6 @@ a, button { touch-action: manipulation; }
                     <div class="portfolio-item bg-gray-50 rounded-lg overflow-hidden shadow-md hover:shadow-lg transition-all duration-300"><img src="https://i.imgur.com/iOara8C.png" alt="The Mansion" class="w-full h-48 object-cover cursor-pointer"></div>
                 </div></div>
             </div></div>
-        </div>
     <div class="flex justify-center mt-12">
       <a href="#awards" class="px-6 py-3 bg-primary text-white rounded-button shadow-md hover:bg-opacity-90 transition-all duration-300 whitespace-nowrap">View My Awards</a>
     </div>
@@ -898,7 +856,6 @@ a, button { touch-action: manipulation; }
 <div class="flex items-center space-x-2"><i class="ri-medal-line text-primary"></i><span>Gold Aiguillette</span></div>
 </div>
 </div>
-</div>
 <div class="mb-8">
 <h4 class="text-lg font-semibold text-gray-700 mb-3">Ribbons</h4>
 <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -910,7 +867,6 @@ a, button { touch-action: manipulation; }
 <div class="space-y-2">
 <div class="flex items-center space-x-2"><i class="ri-award-line text-primary"></i><span>NCO Professional Development</span></div>
 <div class="flex items-center space-x-2"><i class="ri-award-line text-primary"></i><span>Army Service</span></div>
-</div>
 </div>
 </div>
 <div class="mt-12">
@@ -928,7 +884,6 @@ a, button { touch-action: manipulation; }
 <div class="flex items-center space-x-2"><i class="ri-medal-line text-primary"></i><span>Commander's Insignia</span></div>
 <div class="flex items-center space-x-2"><i class="ri-medal-line text-primary"></i><span>Gold Aiguillette</span></div>
 <div class="flex items-center space-x-2"><i class="ri-medal-line text-primary"></i><span>Driver W</span></div>
-</div>
 </div>
 </div>
 <div>
@@ -954,9 +909,7 @@ a, button { touch-action: manipulation; }
 <div class="flex items-center space-x-2"><i class="ri-award-line text-primary"></i><span>Outstanding Airman Award</span></div>
 </div>
 </div>
-</div>
 </div></div>
-</div>
 <div class="flex justify-center mt-12">
 <a href="#skills" class="px-6 py-3 bg-primary text-white rounded-button shadow-md hover:bg-opacity-90 transition-all duration-300 whitespace-nowrap">View My Skills</a>
 </div>
@@ -975,7 +928,6 @@ a, button { touch-action: manipulation; }
 <div class="bg-gray-50 p-4 rounded-lg"><h3 class="text-lg font-semibold mb-3 text-primary">Collaboration</h3><div class="w-full bg-gray-200 rounded-full h-2.5"><div class="bg-primary h-2.5 rounded-full" style="width: 85%"></div></div></div>
 <div class="bg-gray-50 p-4 rounded-lg"><h3 class="text-lg font-semibold mb-3 text-primary">Teamwork</h3><div class="w-full bg-gray-200 rounded-full h-2.5"><div class="bg-primary h-2.5 rounded-full" style="width: 92%"></div></div></div>
 </div></div>
-</div>
 <div class="flex justify-center mt-12">
 <a href="#contact" class="px-6 py-3 bg-primary text-white rounded-button shadow-md hover:bg-opacity-90 transition-all duration-300 whitespace-nowrap">Contact Me</a>
 </div>
@@ -1004,7 +956,6 @@ a, button { touch-action: manipulation; }
 <i class="ri-arrow-right-line ri-lg text-gray-500"></i>
 </a>
 </div></div>
-</div>
 <div class="flex justify-center mt-12">
 <a href="#home" class="px-6 py-3 bg-primary text-white rounded-button shadow-md hover:bg-opacity-90 transition-all duration-300 whitespace-nowrap">Back to Home</a>
 </div>
@@ -1102,50 +1053,6 @@ function showPrevImage() { currentImageIndex=(currentImageIndex-1+portfolioImage
 function showNextImage() { currentImageIndex=(currentImageIndex+1)%portfolioImages.length; document.getElementById('lightboxImg').src=portfolioImages[currentImageIndex].src; }
 
 
-// ===== ACCORDION (mobile experience cards) =====
-function initAccordions() {
-  if (window.innerWidth > 768) return;
-  document.querySelectorAll('.accordion-card').forEach(card => {
-    const header = card.querySelector('.accordion-header');
-    if (!header) return;
-    header.addEventListener('click', () => {
-      const isOpen = card.classList.contains('open');
-      // Close all
-      document.querySelectorAll('.accordion-card.open').forEach(c => c.classList.remove('open'));
-      // Open clicked if it was closed
-      if (!isOpen) card.classList.add('open');
-    });
-  });
-}
-
-// ===== AWARD GROUP ACCORDIONS =====
-function initAwardGroups() {
-  if (window.innerWidth > 768) return;
-  // Wrap each awards sub-group in collapsible on mobile
-  document.querySelectorAll('#awards .mb-8, #awards .mt-12 .mb-8, #awards > div > div > div').forEach(group => {
-    const h4 = group.querySelector('h4');
-    if (!h4 || group.querySelector('.award-group-header')) return;
-    const content = group.innerHTML;
-    const h4Html = h4.outerHTML;
-    const bodyHtml = content.replace(h4Html, '');
-    group.innerHTML = `
-      <div class="award-group-header">
-        ${h4Html.replace('<h4', '<h4').replace('mb-3', 'mb-0')}
-        <span class="award-arrow">▼</span>
-      </div>
-      <div class="award-group-body">${bodyHtml}</div>
-    `;
-    group.classList.add('award-group');
-    group.querySelector('.award-group-header').addEventListener('click', () => {
-      group.classList.toggle('open');
-    });
-  });
-}
-
-window.addEventListener('resize', () => {
-  if (window.innerWidth <= 768) { initAccordions(); initAwardGroups(); }
-});
-
 // ===== INIT =====
 document.addEventListener('DOMContentLoaded', function() {
   setTimeout(function() {
@@ -1154,7 +1061,7 @@ document.addEventListener('DOMContentLoaded', function() {
     setTimeout(function() {
       ls.style.display='none';
       document.querySelectorAll('.section').forEach((s,i) => setTimeout(()=>s.classList.add('visible'),100*i));
-      createParticles(); type(); initLightbox(); initAccordions(); initAwardGroups();
+      createParticles(); type(); initLightbox();
     }, 500);
   }, 1500);
 
