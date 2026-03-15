@@ -206,14 +206,19 @@ html.dark #darkToggle .toggle-knob {
 }
 .back-to-top {
   position: fixed;
-  bottom: 20px;
+  bottom: 24px;
   right: 20px;
-  z-index: 99;
+  z-index: 9998;
   opacity: 0;
   visibility: hidden;
-  transition: all 0.3s ease;
+  pointer-events: none;
+  transition: opacity 0.3s ease, visibility 0.3s ease;
 }
-.back-to-top.visible { opacity: 1; visibility: visible; }
+.back-to-top.visible {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+}
 .particle {
   position: fixed;
   pointer-events: none;
@@ -354,8 +359,9 @@ a, button { touch-action: manipulation; }
   #contact span.font-medium { font-size: 1rem; }
 
   /* CTA buttons at bottom of sections */
-  .flex.justify-center.mt-12 { margin-top: 2rem; }
-  .flex.justify-center a.px-6 { padding: 13px 28px; font-size: 0.9rem; width: 80%; text-align: center; }
+  .flex.justify-center.mt-12 { margin-top: 14px !important; }
+  .flex.justify-center.mt-8 { margin-top: 10px !important; }
+  .flex.justify-center a { font-size: 0.72rem !important; padding: 6px 14px !important; border-radius: 6px !important; box-shadow: none !important; opacity: 0.75; width: auto !important; letter-spacing: 0.02em; }
 
   /* Back to top: bigger, easier to tap */
   .back-to-top { width: 48px; height: 48px; bottom: 16px; right: 16px; }
@@ -519,28 +525,6 @@ a, button { touch-action: manipulation; }
   /* --- General section padding --- */
   .section.py-20 { padding-top: 28px !important; padding-bottom: 28px !important; }
   .container.mx-auto.px-4 { padding-left: 12px !important; padding-right: 12px !important; }
-}
-
-/* ===== MOBILE: toned-down section CTA buttons ===== */
-@media (max-width: 768px) {
-  .flex.justify-center.mt-12,
-  .flex.justify-center.mt-8 {
-    margin-top: 14px !important;
-  }
-  .flex.justify-center.mt-12 > a,
-  .flex.justify-center.mt-8 > a {
-    font-size: 0.75rem !important;
-    padding: 7px 16px !important;
-    border-radius: 6px !important;
-    box-shadow: none !important;
-    opacity: 0.8;
-    letter-spacing: 0.02em;
-    width: auto !important;
-  }
-  .flex.justify-center.mt-12 > a:active,
-  .flex.justify-center.mt-8 > a:active {
-    opacity: 1;
-  }
 }
 </style>
 </head>
@@ -966,7 +950,7 @@ a, button { touch-action: manipulation; }
 <footer class="bg-white py-8 border-t border-gray-200">
 <div class="container mx-auto px-4 text-center">
 <p class="text-gray-600">© 2025 Ceo's Portfolio. All rights reserved.</p>
-<p class="text-gray-500 text-sm mt-2">Last updated: June 22, 2025</p>
+<p class="text-gray-500 text-sm mt-2">Last updated: March 15, 2026</p>
 </div>
 </footer>
 <div style="height: env(safe-area-inset-bottom); background: var(--bg-secondary);"></div>
@@ -1086,8 +1070,18 @@ document.addEventListener('DOMContentLoaded', function() {
   });
 
   const backToTop = document.getElementById('backToTop');
-  window.addEventListener('scroll', () => { backToTop.classList.toggle('visible', window.pageYOffset>300); });
-  backToTop.addEventListener('click', () => window.scrollTo({top:0,behavior:'smooth'}));
+  let scrollTimer;
+  window.addEventListener('scroll', () => {
+    clearTimeout(scrollTimer);
+    scrollTimer = setTimeout(() => {
+      const scrolled = window.scrollY || document.documentElement.scrollTop;
+      backToTop.classList.toggle('visible', scrolled > 300);
+    }, 50);
+  }, { passive: true });
+  backToTop.addEventListener('click', (e) => {
+    e.preventDefault();
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
 
   document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     anchor.addEventListener('click', function(e) {
