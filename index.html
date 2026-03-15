@@ -223,12 +223,18 @@ html.dark #darkToggle .toggle-knob {
   visibility: visible;
   pointer-events: auto;
 }
-.particle {
+#particle-container {
   position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  pointer-events: none;
+  z-index: 1;
+  overflow: hidden;
+}
+.particle {
+  position: absolute;
   pointer-events: none;
   opacity: 0.7;
-  z-index: 1;
-  will-change: transform, opacity;
 }
 .typing-container {
   font-size: 1.8rem;
@@ -246,38 +252,115 @@ html.dark #darkToggle .toggle-knob {
   white-space: nowrap;
   overflow: hidden;
 }
+/* ===== LIGHTBOX ===== */
 .lightbox {
   display: none;
   position: fixed;
-  top: 0; left: 0;
-  width: 100%; height: 100%;
-  background: rgba(0,0,0,0.9);
-  z-index: 1000;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.95);
+  z-index: 10000;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
+  overscroll-behavior: contain;
+  touch-action: none;
 }
 .lightbox.active { display: flex; }
-.lightbox-content { max-width: 90%; max-height: 90%; position: relative; }
-.lightbox-img { max-width: 100%; max-height: 90vh; border-radius: 8px; }
-.lightbox-close {
+
+/* Top bar: counter + close */
+.lightbox-topbar {
   position: absolute;
-  top: -40px; right: 0;
-  background: none; border: none;
-  color: white; font-size: 2rem; cursor: pointer;
+  top: 0; left: 0; right: 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 14px 16px;
+  z-index: 2;
+}
+.lightbox-counter {
+  color: rgba(255,255,255,0.6);
+  font-size: 0.8rem;
+  font-family: inherit;
+}
+.lightbox-close {
+  background: rgba(255,255,255,0.12);
+  border: none;
+  color: white;
+  width: 36px; height: 36px;
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1.2rem;
+  cursor: pointer;
+  touch-action: manipulation;
+}
+.lightbox-close:active { background: rgba(255,255,255,0.25); }
+
+/* Image area */
+.lightbox-img-wrap {
+  width: 100%;
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 56px 12px 12px;
+  overflow: hidden;
+  user-select: none;
+}
+.lightbox-img {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+  border-radius: 8px;
+  pointer-events: none;
+  transition: opacity 0.15s ease;
+}
+.lightbox-img.fading { opacity: 0; }
+
+/* Bottom controls: prev · counter · next */
+.lightbox-controls {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  padding: 12px 20px 20px;
+  width: 100%;
 }
 .lightbox-nav {
-  position: absolute;
-  top: 50%; transform: translateY(-50%);
-  background: rgba(255,255,255,0.2); border: none;
-  color: white; font-size: 2rem;
-  width: 50px; height: 50px;
-  border-radius: 50%; cursor: pointer;
+  background: rgba(255,255,255,0.12);
+  border: none;
+  color: white;
+  width: 48px; height: 48px;
+  border-radius: 50%;
   display: flex; align-items: center; justify-content: center;
-  transition: background 0.3s;
+  font-size: 1.3rem;
+  cursor: pointer;
+  touch-action: manipulation;
+  transition: background 0.2s;
+  flex-shrink: 0;
 }
-.lightbox-nav:hover { background: rgba(255,255,255,0.4); }
-.lightbox-prev { left: 20px; }
-.lightbox-next { right: 20px; }
+.lightbox-nav:active { background: rgba(255,255,255,0.3); }
+.lightbox-dots {
+  display: flex;
+  gap: 5px;
+  align-items: center;
+  flex: 1;
+  justify-content: center;
+  overflow: hidden;
+  max-width: 200px;
+}
+.lightbox-dot {
+  width: 5px; height: 5px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.3);
+  flex-shrink: 0;
+  transition: background 0.2s, transform 0.2s;
+}
+.lightbox-dot.active {
+  background: #fff;
+  transform: scale(1.4);
+}
 @media (max-width: 768px) {
   .typing-container { font-size: 1.4rem; height: 50px; }
 }
@@ -367,11 +450,7 @@ a, button { touch-action: manipulation; }
   /* Back to top: bigger, easier to tap */
   .back-to-top { width: 48px !important; height: 48px !important; bottom: 20px !important; right: 16px !important; top: auto !important; transform: none !important; }
 
-  /* Lightbox nav buttons: bigger on mobile */
-  .lightbox-prev { left: 8px; }
-  .lightbox-next { right: 8px; }
-  .lightbox-nav { width: 42px; height: 42px; font-size: 1.4rem; }
-  .lightbox-close { font-size: 1.6rem; top: -36px; }
+
 
   /* Mobile menu: bigger tap targets */
   .mobile-menu a.py-2 { padding: 12px 4px; font-size: 1rem; border-bottom: 1px solid var(--border-color); }
@@ -570,6 +649,7 @@ a, button { touch-action: manipulation; }
 </style>
 </head>
 <body>
+<div id="particle-container"></div>
 <div class="loading-screen" id="loadingScreen">
   <div class="loading-logo">17</div>
   <div class="loading-text">Loading...</div>
@@ -609,7 +689,7 @@ a, button { touch-action: manipulation; }
     </div>
   </div>
 </header>
-<main class="pt-20" style="isolation: isolate;">
+<main class="pt-20">
 <section id="home" class="section min-h-screen flex items-center justify-center relative" style="padding-top: env(safe-area-inset-top);">
   <div class="container mx-auto px-4 text-center z-10">
     <h1 class="text-5xl md:text-6xl font-bold mb-6">Hi, I'm Ceo.</h1>
@@ -1001,10 +1081,18 @@ a, button { touch-action: manipulation; }
 </button>
 
 <div class="lightbox" id="lightbox">
-  <button class="lightbox-close" id="lightboxClose"><i class="ri-close-line"></i></button>
-  <button class="lightbox-nav lightbox-prev" id="lightboxPrev"><i class="ri-arrow-left-line"></i></button>
-  <button class="lightbox-nav lightbox-next" id="lightboxNext"><i class="ri-arrow-right-line"></i></button>
-  <div class="lightbox-content"><img class="lightbox-img" id="lightboxImg" src="" alt=""></div>
+  <div class="lightbox-topbar">
+    <span class="lightbox-counter" id="lightboxCounter">1 / 1</span>
+    <button class="lightbox-close" id="lightboxClose"><i class="ri-close-line"></i></button>
+  </div>
+  <div class="lightbox-img-wrap" id="lightboxImgWrap">
+    <img class="lightbox-img" id="lightboxImg" src="" alt="">
+  </div>
+  <div class="lightbox-controls">
+    <button class="lightbox-nav" id="lightboxPrev"><i class="ri-arrow-left-s-line"></i></button>
+    <div class="lightbox-dots" id="lightboxDots"></div>
+    <button class="lightbox-nav" id="lightboxNext"><i class="ri-arrow-right-s-line"></i></button>
+  </div>
 </div>
 
 <script>
@@ -1036,7 +1124,10 @@ function type() {
 
 // ===== PARTICLES =====
 function createParticles() {
-  for (let i = 0; i < 50; i++) createParticle();
+  for (let i = 0; i < 50; i++) {
+    // Stagger each particle so they don't all appear at once
+    setTimeout(() => createParticle(), Math.random() * 8000);
+  }
 }
 function createParticle() {
   const particle = document.createElement('div');
@@ -1045,37 +1136,118 @@ function createParticle() {
   const posX = Math.random() * window.innerWidth;
   const duration = Math.random() * 15000 + 8000;
   const windStrength = (Math.random() * 15 + 5) * (Math.random() > 0.5 ? 1 : -1);
-  particle.style.cssText = `width:${size}px;height:${size}px;left:${posX}px;top:-10px;border-radius:${Math.random()>0.7?'2px':'50%'};background:var(--particle-color);box-shadow:0 0 ${Math.random()*5+5}px rgba(99,102,241,0.5)`;
-  particle.animate([{transform:'translate(0,0) rotate(0deg)',opacity:0.8},{transform:`translate(${windStrength}vw,100vh) rotate(${windStrength*2}deg)`,opacity:0}],{duration,easing:'cubic-bezier(0.2,0.8,0.3,1)',iterations:Infinity});
-  document.body.appendChild(particle);
+  // Start particles at a random Y position along the screen height
+  // so on first load they're already spread out, not all bunched at top
+  const startY = Math.random() * window.innerHeight;
+  // Calculate how far through its animation this particle would be
+  const startFraction = startY / window.innerHeight;
+  particle.style.cssText = `width:${size}px;height:${size}px;left:${posX}px;top:${startY}px;border-radius:${Math.random()>0.7?'2px':'50%'};background:var(--particle-color);box-shadow:0 0 ${Math.random()*5+5}px rgba(99,102,241,0.5)`;
+  const remainingY = window.innerHeight - startY;
+  const totalVH = window.innerHeight;
+  particle.animate(
+    [
+      {transform:'translate(0,0) rotate(0deg)', opacity: 0.8},
+      {transform:`translate(${windStrength}vw,${totalVH}px) rotate(${windStrength*2}deg)`, opacity: 0}
+    ],
+    {
+      duration,
+      delay: -(duration * startFraction), // negative delay = start mid-animation
+      easing:'cubic-bezier(0.2,0.8,0.3,1)',
+      iterations: Infinity
+    }
+  );
+
 }
 
 // ===== LIGHTBOX =====
 let currentImageIndex = 0, portfolioImages = [];
+
+function updateLightboxUI() {
+  const img = document.getElementById('lightboxImg');
+  const counter = document.getElementById('lightboxCounter');
+  const dotsEl = document.getElementById('lightboxDots');
+  img.classList.add('fading');
+  setTimeout(() => {
+    img.src = portfolioImages[currentImageIndex].src;
+    img.onload = () => img.classList.remove('fading');
+  }, 150);
+  counter.textContent = (currentImageIndex + 1) + ' / ' + portfolioImages.length;
+  // Dots — show max 7, sliding window
+  const total = portfolioImages.length;
+  const maxDots = 7;
+  dotsEl.innerHTML = '';
+  const half = Math.floor(maxDots / 2);
+  let start = Math.max(0, currentImageIndex - half);
+  let end = Math.min(total - 1, start + maxDots - 1);
+  start = Math.max(0, end - maxDots + 1);
+  for (let i = start; i <= end; i++) {
+    const d = document.createElement('span');
+    d.className = 'lightbox-dot' + (i === currentImageIndex ? ' active' : '');
+    dotsEl.appendChild(d);
+  }
+}
+
 function initLightbox() {
   portfolioImages = Array.from(document.querySelectorAll('.portfolio-item img'));
-  portfolioImages.forEach((img, i) => { img.style.cursor='pointer'; img.addEventListener('click',()=>openLightbox(i)); });
+  portfolioImages.forEach((img, i) => {
+    img.style.cursor = 'pointer';
+    img.addEventListener('click', () => openLightbox(i));
+  });
+
   document.getElementById('lightboxClose').addEventListener('click', closeLightbox);
   document.getElementById('lightboxPrev').addEventListener('click', showPrevImage);
   document.getElementById('lightboxNext').addEventListener('click', showNextImage);
-  document.getElementById('lightbox').addEventListener('click', e => { if(e.target.id==='lightbox') closeLightbox(); });
-  document.addEventListener('keydown', e => {
-    if(document.getElementById('lightbox').classList.contains('active')) {
-      if(e.key==='Escape') closeLightbox();
-      if(e.key==='ArrowLeft') showPrevImage();
-      if(e.key==='ArrowRight') showNextImage();
-    }
+
+  // Close on backdrop tap (not on image/controls)
+  document.getElementById('lightbox').addEventListener('click', e => {
+    if (e.target.id === 'lightbox' || e.target.id === 'lightboxImgWrap') closeLightbox();
   });
+
+  // Keyboard
+  document.addEventListener('keydown', e => {
+    if (!document.getElementById('lightbox').classList.contains('active')) return;
+    if (e.key === 'Escape') closeLightbox();
+    if (e.key === 'ArrowLeft') showPrevImage();
+    if (e.key === 'ArrowRight') showNextImage();
+  });
+
+  // Touch swipe
+  let touchStartX = 0, touchStartY = 0, swiping = false;
+  const wrap = document.getElementById('lightboxImgWrap');
+  wrap.addEventListener('touchstart', e => {
+    touchStartX = e.touches[0].clientX;
+    touchStartY = e.touches[0].clientY;
+    swiping = true;
+  }, { passive: true });
+  wrap.addEventListener('touchend', e => {
+    if (!swiping) return;
+    const dx = e.changedTouches[0].clientX - touchStartX;
+    const dy = e.changedTouches[0].clientY - touchStartY;
+    swiping = false;
+    if (Math.abs(dx) < 40 || Math.abs(dy) > Math.abs(dx)) return; // not a horizontal swipe
+    if (dx < 0) showNextImage();
+    else showPrevImage();
+  }, { passive: true });
 }
+
 function openLightbox(index) {
   currentImageIndex = index;
-  document.getElementById('lightboxImg').src = portfolioImages[currentImageIndex].src;
   document.getElementById('lightbox').classList.add('active');
   document.body.style.overflow = 'hidden';
+  updateLightboxUI();
 }
-function closeLightbox() { document.getElementById('lightbox').classList.remove('active'); document.body.style.overflow='auto'; }
-function showPrevImage() { currentImageIndex=(currentImageIndex-1+portfolioImages.length)%portfolioImages.length; document.getElementById('lightboxImg').src=portfolioImages[currentImageIndex].src; }
-function showNextImage() { currentImageIndex=(currentImageIndex+1)%portfolioImages.length; document.getElementById('lightboxImg').src=portfolioImages[currentImageIndex].src; }
+function closeLightbox() {
+  document.getElementById('lightbox').classList.remove('active');
+  document.body.style.overflow = 'auto';
+}
+function showPrevImage() {
+  currentImageIndex = (currentImageIndex - 1 + portfolioImages.length) % portfolioImages.length;
+  updateLightboxUI();
+}
+function showNextImage() {
+  currentImageIndex = (currentImageIndex + 1) % portfolioImages.length;
+  updateLightboxUI();
+}
 
 
 // ===== INIT =====
@@ -1110,14 +1282,16 @@ document.addEventListener('DOMContentLoaded', function() {
     navLinks.forEach(l => { l.classList.remove('active'); if(l.getAttribute('href')==='#'+current) l.classList.add('active'); });
   });
 
+  // Re-append back-to-top directly to <body> to escape any stacking context
   const backToTop = document.getElementById('backToTop');
-  let scrollTimer;
+  document.body.appendChild(backToTop);
   window.addEventListener('scroll', () => {
-    clearTimeout(scrollTimer);
-    scrollTimer = setTimeout(() => {
-      const scrolled = window.scrollY || document.documentElement.scrollTop;
-      backToTop.classList.toggle('visible', scrolled > 300);
-    }, 50);
+    const scrolled = window.scrollY || document.documentElement.scrollTop;
+    if (scrolled > 300) {
+      backToTop.classList.add('visible');
+    } else {
+      backToTop.classList.remove('visible');
+    }
   }, { passive: true });
   backToTop.addEventListener('click', (e) => {
     e.preventDefault();
@@ -1139,8 +1313,11 @@ document.addEventListener('DOMContentLoaded', function() {
   });
 
   window.addEventListener('resize', () => {
-    document.querySelectorAll('.particle').forEach(p => p.remove());
-    createParticles();
+    // Just clear old particles, don't re-trigger the burst
+    const container = document.getElementById('particle-container');
+    if (container) container.innerHTML = '';
+    particleCount = 0;
+    if (particleInterval) clearInterval(particleInterval);
   });
 });
 </script>
