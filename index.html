@@ -158,12 +158,10 @@ html.dark #darkToggle .toggle-knob {
 .section {
   min-height: calc(100vh - 80px);
   opacity: 0;
-  transform: translateY(20px);
-  transition: opacity 0.5s ease, transform 0.5s ease;
+  transition: opacity 0.6s ease;
 }
 .section.visible {
   opacity: 1;
-  transform: translateY(0);
 }
 .nav-button {
   position: relative;
@@ -199,10 +197,9 @@ html.dark #darkToggle .toggle-knob {
   border-radius: 50%;
   background-color: #6366f1;
 }
-.experience-card { transition: all 0.3s ease; }
+.experience-card { transition: box-shadow 0.3s ease; }
 .experience-card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1), 0 4px 6px -2px rgba(0,0,0,0.05);
+  box-shadow: 0 10px 20px -3px rgba(0,0,0,0.12), 0 4px 8px -2px rgba(0,0,0,0.07);
 }
 .back-to-top {
   position: fixed !important;
@@ -1282,9 +1279,12 @@ document.addEventListener('DOMContentLoaded', function() {
     navLinks.forEach(l => { l.classList.remove('active'); if(l.getAttribute('href')==='#'+current) l.classList.add('active'); });
   });
 
-  // Re-append back-to-top directly to <body> to escape any stacking context
+  // Re-append both fixed elements directly to <body> last,
+  // so no transformed parent can affect their position: fixed
   const backToTop = document.getElementById('backToTop');
+  const lightbox = document.getElementById('lightbox');
   document.body.appendChild(backToTop);
+  document.body.appendChild(lightbox);
   window.addEventListener('scroll', () => {
     const scrolled = window.scrollY || document.documentElement.scrollTop;
     if (scrolled > 300) {
